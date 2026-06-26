@@ -1,0 +1,285 @@
+dashboard_title: "Malawi Stockout Trends"
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000023"
+version: "1.0.0"
+description: "Malawi-specific stockout trends by health program and product over time."
+slug: malawi-stockouts
+css: ""
+published: true
+certified_by: null
+certification_details: null
+is_managed_externally: false
+metadata:
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  default_filters: "{}"
+  color_scheme: supersetColors
+  label_colors: {}
+  color_scheme_domain: []
+  shared_label_colors: []
+  cross_filters_enabled: true
+  filter_bar_orientation: HORIZONTAL
+  native_filter_configuration:
+    - id: NATIVE_FILTER-malawi-program
+      name: Health Program
+      filterType: filter_select
+      targets:
+        - column:
+            name: malawi_program
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-program
+      name: Program
+      filterType: filter_select
+      targets:
+        - column:
+            name: program_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-region
+      name: Region
+      filterType: filter_select
+      targets:
+        - column:
+            name: parent_zone_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-district
+      name: District
+      filterType: filter_select
+      targets:
+        - column:
+            name: zone_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-period
+      name: Period
+      filterType: filter_select
+      targets:
+        - column:
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-facility
+      name: Facility
+      filterType: filter_select
+      targets:
+        - column:
+            name: facility_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-product
+      name: Product
+      filterType: filter_select
+      targets:
+        - column:
+            name: product_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    type: ROOT
+    id: ROOT_ID
+    children:
+      - GRID_ID
+  GRID_ID:
+    type: GRID
+    id: GRID_ID
+    children:
+      - ROW-mw-stockout-1
+      - ROW-mw-stockout-2
+      - ROW-mw-stockout-3
+    parents:
+      - ROOT_ID
+  ROW-mw-stockout-1:
+    type: ROW
+    id: ROW-mw-stockout-1
+    children:
+      - CHART-mw-program-trend
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-program-trend:
+    type: CHART
+    id: CHART-mw-program-trend
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-1
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Stockout Rate by Health Program"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000021"
+  ROW-mw-stockout-2:
+    type: ROW
+    id: ROW-mw-stockout-2
+    children:
+      - CHART-mw-product-trend
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-product-trend:
+    type: CHART
+    id: CHART-mw-product-trend
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-2
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Stockout Rate by Product"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
+  ROW-mw-stockout-3:
+    type: ROW
+    id: ROW-mw-stockout-3
+    children:
+      - CHART-mw-district-trend
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-district-trend:
+    type: CHART
+    id: CHART-mw-district-trend
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-3
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Stockout Rate by District"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000024"

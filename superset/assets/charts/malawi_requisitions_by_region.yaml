@@ -29,6 +29,7 @@ params:
   legendOrientation: top
   x_axis_title: Region
   y_axis_title: Requisition Count
+  y_axis_format: ",.0f"
   rich_tooltip: true
   show_value: true
 query_context: null

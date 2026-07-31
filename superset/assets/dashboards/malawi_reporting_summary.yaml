@@ -1,0 +1,290 @@
+dashboard_title: "Malawi Reporting Summary"
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000069"
+version: "1.0.0"
+description: "Malawi executive reporting summary: reporting rate by program, timeliness, indicator pivot, annual rates, and the 12-month national trend — filterable by the three official Malawi regions."
+slug: malawi-reporting-summary
+css: ""
+published: true
+certified_by: null
+certification_details: null
+is_managed_externally: false
+metadata:
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  default_filters: "{}"
+  color_scheme: supersetColors
+  label_colors: {}
+  color_scheme_domain: []
+  shared_label_colors: []
+  cross_filters_enabled: true
+  filter_bar_orientation: HORIZONTAL
+  native_filter_configuration:
+    - id: NATIVE_FILTER-program
+      name: Program
+      filterType: filter_select
+      targets:
+        - column:
+            name: program_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-region
+      name: Region
+      filterType: filter_select
+      targets:
+        - column:
+            name: official_region
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-district
+      name: District
+      filterType: filter_select
+      targets:
+        - column:
+            name: zone_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-period
+      name: Period
+      filterType: filter_select
+      targets:
+        - column:
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    type: ROOT
+    id: ROOT_ID
+    children:
+      - GRID_ID
+  GRID_ID:
+    type: GRID
+    id: GRID_ID
+    children:
+      - ROW-headline
+      - ROW-trend
+      - ROW-pivot
+      - ROW-annual
+      - ROW-non-reporting
+    parents:
+      - ROOT_ID
+  ROW-headline:
+    type: ROW
+    id: ROW-headline
+    children:
+      - CHART-rate-pie
+      - CHART-timeliness
+      - CHART-rate-program
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-rate-pie:
+    type: CHART
+    id: CHART-rate-pie
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-headline
+    meta:
+      chartId: 0
+      height: 50
+      width: 4
+      sliceName: "Malawi: Reporting Rate (Last 12 Months)"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000062"
+  CHART-timeliness:
+    type: CHART
+    id: CHART-timeliness
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-headline
+    meta:
+      chartId: 0
+      height: 50
+      width: 4
+      sliceName: "Malawi: Timeliness of Reports"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000063"
+  CHART-rate-program:
+    type: CHART
+    id: CHART-rate-program
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-headline
+    meta:
+      chartId: 0
+      height: 50
+      width: 4
+      sliceName: "Malawi: Reporting Rate by Program"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000064"
+  ROW-trend:
+    type: ROW
+    id: ROW-trend
+    children:
+      - CHART-trend
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-trend:
+    type: CHART
+    id: CHART-trend
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-trend
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: National Reporting Rate - Last 12 Months"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000065"
+  ROW-pivot:
+    type: ROW
+    id: ROW-pivot
+    children:
+      - CHART-pivot
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-pivot:
+    type: CHART
+    id: CHART-pivot
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-pivot
+    meta:
+      chartId: 0
+      height: 60
+      width: 12
+      sliceName: "Malawi: Indicator Summary: Reporting Rate by Program (Last 12 Months)"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000066"
+  ROW-annual:
+    type: ROW
+    id: ROW-annual
+    children:
+      - CHART-annual
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-annual:
+    type: CHART
+    id: CHART-annual
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-annual
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Annual Reporting Rate by Program"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000067"
+  ROW-non-reporting:
+    type: ROW
+    id: ROW-non-reporting
+    children:
+      - CHART-non-reporting
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-non-reporting:
+    type: CHART
+    id: CHART-non-reporting
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-non-reporting
+    meta:
+      chartId: 0
+      height: 60
+      width: 12
+      sliceName: "Malawi: Non Reporting Facilities"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000068"

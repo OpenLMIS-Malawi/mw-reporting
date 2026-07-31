@@ -1,0 +1,35 @@
+slice_name: "Malawi: Annual Reporting Rate by Program"
+viz_type: dist_bar
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000067"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+description: "Average reporting rate per program for each calendar year (rolling). Columns = year, bars = program."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: dist_bar
+  groupby:
+    - program_name
+  metrics:
+    - reporting_rate
+  columns:
+    - period_year
+  adhoc_filters: []
+  bar_stacked: false
+  order_bars: true
+  order_desc: false
+  show_legend: true
+  show_bar_value: false
+  rich_tooltip: true
+  bottom_margin: auto
+  x_axis_label: Year
+  y_axis_label: Reporting Rate
+  y_axis_format: ".1%"
+  color_scheme: supersetColors
+  legendType: scroll
+  legendOrientation: top
+  row_limit: 50000
+  time_range: "Last 5 years"
+query_context: null

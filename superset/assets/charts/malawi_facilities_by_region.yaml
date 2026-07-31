@@ -1,0 +1,44 @@
+slice_name: "Malawi: Facilities per Region"
+viz_type: pie
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000042"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000040"
+description: "Distribution of Malawi facilities across the three official regions."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  groupby:
+    - official_region
+  metric:
+    expressionType: SIMPLE
+    column:
+      column_name: facility_id
+      type: String
+    aggregate: COUNT
+    label: "Facilities"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      subject: official_region
+      operator: IN
+      comparator:
+        - Northern
+        - Central
+        - Southern
+  row_limit: 1000
+  sort_by_metric: true
+  color_scheme: supersetColors
+  show_labels: true
+  show_legend: true
+  legendType: scroll
+  legendOrientation: top
+  label_type: key_value_percent
+  number_format: ",.0f"
+  date_format: smart_date
+  show_labels_threshold: 5
+  outerRadius: 70
+  innerRadius: 30
+query_context: null

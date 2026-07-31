@@ -2,7 +2,7 @@ slice_name: "Malawi: Non Reporting Facilities (Orders)"
 viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000086"
 version: "1.0.0"
-dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000081"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000061"
 description: "Active facilities that did not submit a requisition for the selected period. These are reporting blind spots with no stock visibility."
 certified_by: null
 certification_details: null

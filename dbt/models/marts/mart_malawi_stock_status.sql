@@ -9,6 +9,11 @@
 -- Malawi stock status: extends the core mart_stock_status with
 -- Malawi-specific health program classification per product.
 -- Only includes products mapped to a Malawi program.
+-- Programme categories in var('denied_programs') are excluded (they are
+-- product-form buckets, not health programmes) -- MW-1482.
+-- official_region standardises the directional source region to the 3
+-- official Malawi regions via the region_crosswalk seed; district_iso
+-- provides the ISO 3166-2 code (map join key) via the malawi_district_iso seed.
 
 select
   s.line_item_id,
@@ -19,7 +24,7 @@ select
   s.facility_active,
   s.facility_enabled,
   s.facility_type_name,
-  s.zone_name,
+  s.zone_name as zone_name,
   s.parent_zone_name,
   s.program_name,
   s.program_code,
@@ -28,7 +33,7 @@ select
   s.period_end_date,
   s.schedule_name,
   s.orderable_id,
-  s.product_code,
+  s.product_code as product_code,
   s.product_name,
   s.beginning_balance,
   s.total_received_quantity,
@@ -48,7 +53,14 @@ select
   s.months_of_stock,
   s.combined_stockout,
   s.stock_status,
-  mp.malawi_program
+  mp.malawi_program,
+  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region,
+  di.district_iso
 from {{ ref('mart_stock_status') }} s
 inner join {{ ref('malawi_program_products') }} mp
   on s.product_code = mp.product_code
+left join {{ ref('region_crosswalk') }} cw
+  on s.parent_zone_name = cw.source_region
+left join {{ ref('malawi_district_iso') }} di
+  on s.zone_name = di.zone_name
+where mp.malawi_program not in ({{ "'" ~ var('denied_programs', ['IMCI', 'HSSP Tracer Items', 'Tablets/Capsules', 'Health Supplies']) | join("', '") ~ "'" }})

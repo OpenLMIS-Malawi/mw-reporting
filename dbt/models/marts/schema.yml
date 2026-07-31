@@ -11,6 +11,22 @@ models:
         description: Geographic region (parent zone or zone if no parent)
         tests:
           - not_null
+      - name: official_region
+        description: >
+          Standardised official region (Northern, Central, Southern) mapped
+          from the directional source region via the region_crosswalk seed.
+          'Unmapped' is the sentinel for a source region absent from the
+          crosswalk (expected on non-Malawi demo geography; should be 0 on
+          real Malawi data).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Northern
+                  - Central
+                  - Southern
+                  - Unmapped
       - name: program_name
         description: Program name
         tests:
@@ -40,7 +56,8 @@ models:
     description: >
       Malawi stock status: core stock status data enriched with Malawi
       health program classification. Only includes products mapped to
-      a Malawi program in the malawi_program_products seed.
+      a Malawi program in the malawi_program_products seed; programme
+      categories in var('denied_programs') are excluded.
     columns:
       - name: line_item_id
         description: Requisition line item UUID
@@ -51,6 +68,23 @@ models:
         description: "Malawi health program name (e.g., National Malaria Control Program, HIV/AIDS, TB)"
         tests:
           - not_null
+      - name: official_region
+        description: >
+          Standardised official region (Northern, Central, Southern) mapped
+          from parent_zone_name via the region_crosswalk seed. 'Unmapped' is
+          the sentinel for a region absent from the crosswalk (should be 0 on
+          real Malawi data).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Northern
+                  - Central
+                  - Southern
+                  - Unmapped
+      - name: district_iso
+        description: "ISO 3166-2 district code (MW-XX) from the malawi_district_iso seed; Superset Country Map join key. Empty string when the facility's district is not in the seed."
       - name: stock_status
         tests:
           - not_null

@@ -27,6 +27,7 @@ select
   s.period_start_date,
   s.period_end_date,
   s.schedule_name,
+  s.schedule_type,
   s.orderable_id,
   s.product_code,
   s.product_name,

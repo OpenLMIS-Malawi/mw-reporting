@@ -22,7 +22,8 @@ params:
   row_limit: 10000
   order_by_cols:
     - '["program_name", true]'
-  server_pagination: false
+  server_pagination: true
+  server_page_length: 25
   show_cell_bars: false
   color_pn: false
   table_timestamp_format: smart_date

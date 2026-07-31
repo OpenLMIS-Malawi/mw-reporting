@@ -57,6 +57,7 @@ position:
     id: GRID_ID
     children:
       - ROW-malawi-1
+      - ROW-malawi-2
     parents:
       - ROOT_ID
   ROW-malawi-1:
@@ -83,3 +84,27 @@ position:
       width: 12
       sliceName: "Malawi: Requisitions by Region"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000011"
+  ROW-malawi-2:
+    type: ROW
+    id: ROW-malawi-2
+    children:
+      - CHART-malawi-status-1
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-malawi-status-1:
+    type: CHART
+    id: CHART-malawi-status-1
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-malawi-2
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Requisitions by Status"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000036"

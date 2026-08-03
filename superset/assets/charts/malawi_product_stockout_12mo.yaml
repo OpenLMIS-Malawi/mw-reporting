@@ -34,4 +34,5 @@ params:
       customColumnName: "Product"
     stockout_line_count:
       customColumnName: "Stocked Out Lines"
+      d3NumberFormat: ",.0f"
 query_context: null

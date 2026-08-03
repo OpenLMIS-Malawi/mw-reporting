@@ -30,7 +30,7 @@ olmis-analytics-malawi/
         mart_malawi_stock_status.yaml
       charts/                            # 10 charts covering stockouts, stock levels,
                                          # requisitions by region, programmatic snapshots
-        malawi_district_stockout_treemap.yaml
+        malawi_district_stockout_map.yaml
         malawi_product_stockout_12mo.yaml
         malawi_program_inventory_snapshot.yaml
         malawi_program_stockout_trend.yaml
@@ -44,7 +44,7 @@ olmis-analytics-malawi/
         malawi_stockouts.yaml            # Stockout focus across products/districts/programs
         malawi_stock_levels.yaml         # Stock-on-hand by program
         malawi_regional_overview.yaml    # Requisition counts by region/status
-        malawi_summary.yaml              # Master Malawi dashboard: treemap + pivot
+        malawi_summary.yaml              # Master Malawi dashboard: district map + pivot
                                          # + 12-month trends
 ```
 
@@ -71,7 +71,7 @@ Computes stock status (STOCKOUT, LOW, ADEQUATE, OVERSTOCK) per (facility, progra
 | Malawi Stockouts | Stockout rate by product / district / program; 12-month trend; programmatic pivot |
 | Malawi Stock Levels | Stock-on-hand distribution by program × facility |
 | Malawi Regional Overview | Requisition activity heatmap by region and status |
-| Malawi Summary | Master dashboard combining the treemap, programmatic pivot, and 12-month stockout trend in one view |
+| Malawi Summary | Master dashboard combining the district map, programmatic pivot, and 12-month stockout trend in one view |
 
 These dashboards demonstrate three extension patterns: aggregating core marts (regional overview), introducing country-specific reference data via a seed (stock status), and composing multiple chart types into a master view (summary). When migrating dashboards from a country's legacy stack, see [the platform's docs/migration-differences.md](https://github.com/SolDevelo/soldevelo-reporting-stack/blob/main/docs/migration-differences.md) for the conventions used.
 

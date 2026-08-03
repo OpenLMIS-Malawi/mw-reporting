@@ -1,7 +1,7 @@
 dashboard_title: "Malawi Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
 version: "1.0.0"
-description: "Executive summary for Malawi tracer products: district stockout treemap, programmatic stockout pivot, multi-program stockout trend, top stocked-out products, and current inventory snapshot per program."
+description: "Executive summary for Malawi tracer products: district stockout map, programmatic stockout pivot, multi-program stockout trend, top stocked-out products, and current inventory snapshot per program."
 slug: malawi-summary
 css: ""
 published: true
@@ -134,7 +134,7 @@ position:
       chartId: 0
       height: 60
       width: 12
-      sliceName: "Malawi: District Stockout Rate (Tracer Products)"
+      sliceName: "Malawi: District Stock-Out Rate (Map)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
   ROW-trend:
     type: ROW

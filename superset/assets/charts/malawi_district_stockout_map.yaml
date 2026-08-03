@@ -16,6 +16,6 @@ params:
   adhoc_filters: []
   time_range: "Last month"
   row_limit: 1000
-  linear_color_scheme: mwStockoutGnRd
+  linear_color_scheme: sequentialGreenToRed
   number_format: ",.1%"
 query_context: null

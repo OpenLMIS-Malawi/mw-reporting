@@ -1,0 +1,39 @@
+slice_name: "Malawi: Reporting Rate by Program"
+viz_type: dist_bar
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000064"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+description: "Per-program reporting rate as a 100% stacked bar (Reported vs Did not report). Replaces the legacy row of six hardcoded per-program pies — auto-adapts to whichever programs the adopter has configured."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: dist_bar
+  groupby:
+    - program_name
+  columns:
+    - reporting_status
+  metrics:
+    - expressionType: SQL
+      sqlExpression: "COUNT(*)"
+      label: "Obligations"
+  adhoc_filters: []
+  contribution: true
+  bar_stacked: true
+  order_bars: true
+  order_desc: false
+  show_legend: true
+  show_bar_value: false
+  rich_tooltip: true
+  bottom_margin: 80
+  x_ticks_layout: staggered
+  x_axis_label: Program
+  y_axis_label: "Reporting share (%)"
+  y_axis_format: ".1%"
+  color_scheme: supersetColors
+  legendType: scroll
+  legendOrientation: top
+  row_limit: 10000
+  time_range: "Last 12 months"
+query_context: null

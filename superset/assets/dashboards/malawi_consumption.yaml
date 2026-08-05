@@ -1,8 +1,8 @@
-dashboard_title: "Malawi Summary"
-uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
+dashboard_title: "Malawi Consumption"
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
 version: "1.0.0"
-description: "Executive summary for Malawi tracer products: district stockout map, programmatic stockout pivot, multi-program stockout trend, top stocked-out products, and current inventory snapshot per program."
-slug: malawi-summary
+description: "Malawi consumption analytics: trend, year-over-year, per-district, top consumed products, and a logistics summary — with a Region filter on the three official Malawi regions."
+slug: malawi-consumption
 css: ""
 published: true
 certified_by: null
@@ -26,7 +26,7 @@ metadata:
       targets:
         - column:
             name: program_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -51,7 +51,7 @@ metadata:
       targets:
         - column:
             name: official_region
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -76,7 +76,7 @@ metadata:
       targets:
         - column:
             name: zone_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -95,13 +95,13 @@ metadata:
         filterState:
           value: null
         ownState: {}
-    - id: NATIVE_FILTER-schedule-type
-      name: Schedule Type
+    - id: NATIVE_FILTER-period
+      name: Period
       filterType: filter_select
       targets:
         - column:
-            name: schedule_type
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -113,7 +113,57 @@ metadata:
         searchAllOptions: false
         inverseSelection: false
       type: NATIVE_FILTER
-      description: "Filter by program reporting frequency (Weekly / Monthly / Quarterly / BUQ)."
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-facility
+      name: Facility
+      filterType: filter_select
+      targets:
+        - column:
+            name: facility_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-product
+      name: Product
+      filterType: filter_select
+      targets:
+        - column:
+            name: product_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
       cascadeParentIds: []
       defaultDataMask:
         extraFormData: {}
@@ -131,36 +181,13 @@ position:
     type: GRID
     id: GRID_ID
     children:
-      - ROW-treemap
       - ROW-trend
-      - ROW-pivot
-      - ROW-tables
+      - ROW-yoy
+      - ROW-district
+      - ROW-products
+      - ROW-logistics
     parents:
       - ROOT_ID
-  ROW-treemap:
-    type: ROW
-    id: ROW-treemap
-    children:
-      - CHART-treemap
-    parents:
-      - ROOT_ID
-      - GRID_ID
-    meta:
-      background: BACKGROUND_TRANSPARENT
-  CHART-treemap:
-    type: CHART
-    id: CHART-treemap
-    children: []
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - ROW-treemap
-    meta:
-      chartId: 0
-      height: 60
-      width: 12
-      sliceName: "Malawi: District Stock-Out Rate (Map)"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
   ROW-trend:
     type: ROW
     id: ROW-trend
@@ -181,40 +208,78 @@ position:
       - ROW-trend
     meta:
       chartId: 0
-      height: 60
+      height: 50
       width: 12
-      sliceName: "Malawi: Program Stockout Rate (Tracer Products, Last 13 Months)"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000033"
-  ROW-pivot:
+      sliceName: "Malawi: Consumption Trend"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000110"
+  ROW-yoy:
     type: ROW
-    id: ROW-pivot
+    id: ROW-yoy
     children:
-      - CHART-pivot
+      - CHART-current-year
+      - CHART-last-year
     parents:
       - ROOT_ID
       - GRID_ID
     meta:
       background: BACKGROUND_TRANSPARENT
-  CHART-pivot:
+  CHART-current-year:
     type: CHART
-    id: CHART-pivot
+    id: CHART-current-year
     children: []
     parents:
       - ROOT_ID
       - GRID_ID
-      - ROW-pivot
+      - ROW-yoy
     meta:
       chartId: 0
-      height: 60
-      width: 12
-      sliceName: "Malawi: Avg. Programmatic Stockout Rate (Last 12 Months)"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
-  ROW-tables:
+      height: 50
+      width: 6
+      sliceName: "Malawi: Consumption — Current 12 Months"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000112"
+  CHART-last-year:
+    type: CHART
+    id: CHART-last-year
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-yoy
+    meta:
+      chartId: 0
+      height: 50
+      width: 6
+      sliceName: "Malawi: Consumption — Previous 12 Months"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000113"
+  ROW-district:
     type: ROW
-    id: ROW-tables
+    id: ROW-district
+    children:
+      - CHART-district
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-district:
+    type: CHART
+    id: CHART-district
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-district
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Consumption per District"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000111"
+  ROW-products:
+    type: ROW
+    id: ROW-products
     children:
       - CHART-products
-      - CHART-snapshot
     parents:
       - ROOT_ID
       - GRID_ID
@@ -227,24 +292,34 @@ position:
     parents:
       - ROOT_ID
       - GRID_ID
-      - ROW-tables
+      - ROW-products
     meta:
       chartId: 0
-      height: 70
-      width: 6
-      sliceName: "Malawi: Product Stockout (Last 12 Months)"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000034"
-  CHART-snapshot:
+      height: 50
+      width: 12
+      sliceName: "Malawi: Most Consumed Products"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000114"
+  ROW-logistics:
+    type: ROW
+    id: ROW-logistics
+    children:
+      - CHART-logistics
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-logistics:
     type: CHART
-    id: CHART-snapshot
+    id: CHART-logistics
     children: []
     parents:
       - ROOT_ID
       - GRID_ID
-      - ROW-tables
+      - ROW-logistics
     meta:
       chartId: 0
-      height: 70
-      width: 6
-      sliceName: "Malawi: Program Current Inventory Snapshot"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000035"
+      height: 60
+      width: 12
+      sliceName: "Malawi: Logistics Summary Report"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000115"

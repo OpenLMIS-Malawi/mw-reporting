@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Regional Overview"
+dashboard_title: "Malawi Requisition"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000012"
 version: "1.0.0"
 description: "Malawi-specific requisition overview by geographic region."
@@ -18,6 +18,33 @@ metadata:
   color_scheme_domain: []
   shared_label_colors: []
   cross_filters_enabled: false
+  filter_bar_orientation: HORIZONTAL
+  native_filter_configuration:
+    - id: NATIVE_FILTER-region
+      name: Region
+      filterType: filter_select
+      targets:
+        - column:
+            name: official_region
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
 position:
   DASHBOARD_VERSION_KEY: v2
   ROOT_ID:
@@ -30,6 +57,7 @@ position:
     id: GRID_ID
     children:
       - ROW-malawi-1
+      - ROW-malawi-2
     parents:
       - ROOT_ID
   ROW-malawi-1:
@@ -56,3 +84,27 @@ position:
       width: 12
       sliceName: "Malawi: Requisitions by Region"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000011"
+  ROW-malawi-2:
+    type: ROW
+    id: ROW-malawi-2
+    children:
+      - CHART-malawi-status-1
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-malawi-status-1:
+    type: CHART
+    id: CHART-malawi-status-1
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-malawi-2
+    meta:
+      chartId: 0
+      height: 50
+      width: 12
+      sliceName: "Malawi: Requisitions by Status"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000036"

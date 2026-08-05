@@ -108,6 +108,24 @@ columns:
     filterable: true
     expression: null
     description: null
+  - column_name: official_region
+    verbose_name: Region
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Standardised official region (Northern, Central, Southern) via the region_crosswalk seed. Prefer this over the raw directional Region."
+  - column_name: district_iso
+    verbose_name: District ISO
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "ISO 3166-2 district code (MW-XX) from the malawi_district_iso seed; join key for the Superset Country Map."
   - column_name: program_name
     verbose_name: Program
     is_dttm: false

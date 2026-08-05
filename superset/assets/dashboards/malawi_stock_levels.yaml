@@ -20,31 +20,6 @@ metadata:
   cross_filters_enabled: true
   filter_bar_orientation: HORIZONTAL
   native_filter_configuration:
-    - id: NATIVE_FILTER-malawi-program
-      name: Health Program
-      filterType: filter_select
-      targets:
-        - column:
-            name: malawi_program
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      controlValues:
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      type: NATIVE_FILTER
-      description: ""
-      cascadeParentIds: []
-      defaultDataMask:
-        extraFormData: {}
-        filterState:
-          value: null
-        ownState: {}
     - id: NATIVE_FILTER-program
       name: Program
       filterType: filter_select
@@ -75,7 +50,7 @@ metadata:
       filterType: filter_select
       targets:
         - column:
-            name: parent_zone_name
+            name: official_region
           datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
       scope:
         rootPath:

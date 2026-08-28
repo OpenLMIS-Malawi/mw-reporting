@@ -14,9 +14,35 @@
 -- which is filtered to Malawi tracer products / denied programmes). Additive —
 -- reads core via ref(), does NOT modify core -- MW-1482.
 
+with base as (
+
+  select
+    f.*,
+    if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region
+  from {{ ref('mart_stock_status') }} f
+  left join {{ ref('region_crosswalk') }} cw
+    on f.parent_zone_name = cw.source_region
+
+),
+
+-- Month flags from the core completeness mart. in_latest_month anchors the
+-- snapshot charts on the latest COMPLETE month - the newest month present
+-- in the data is structurally partial (real data: 7% of the usual facility
+-- coverage) - and in_complete_month lets the trend charts hide ragged
+-- trailing months. A missing flag row degrades to "complete" so a stale
+-- flags table can never blank a dashboard.
+flags as (
+
+  select month, is_complete, is_latest_complete
+  from {{ ref('mart_month_completeness') }}
+  where family = 'stock'
+
+)
+
 select
-  f.*,
-  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region
-from {{ ref('mart_stock_status') }} f
-left join {{ ref('region_crosswalk') }} cw
-  on f.parent_zone_name = cw.source_region
+  base.*,
+  if(f.month = toDate(0), 1, f.is_complete)        as in_complete_month,
+  if(f.month = toDate(0), 0, f.is_latest_complete) as in_latest_month
+from base
+left join flags f
+  on f.month = toStartOfMonth(base.period_end_date)

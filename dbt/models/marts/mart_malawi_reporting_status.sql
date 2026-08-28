@@ -24,11 +24,21 @@ select
   f.period_name,
   f.period_start_date,
   f.period_end_date,
+  f.schedule_type,
   f.reporting_status,
   f.submitted_date,
   f.submitted_week_of_month,
   f.report_timeliness,
-  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region
+  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region,
+  -- month completeness (reporting family): trend charts hide ragged trailing
+  -- months through this flag; a missing flag row degrades to "complete"
+  if(fl.month = toDate(0), 1, fl.is_complete)                    as in_complete_month
 from {{ ref('mart_reporting_status') }} f
 left join {{ ref('region_crosswalk') }} cw
   on f.parent_zone_name = cw.source_region
+left join (
+  select month, is_complete
+  from {{ ref('mart_month_completeness') }}
+  where family = 'reporting'
+) fl
+  on fl.month = toStartOfMonth(f.period_end_date)

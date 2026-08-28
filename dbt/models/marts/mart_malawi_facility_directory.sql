@@ -24,10 +24,22 @@ select
   f.geographic_zone_longitude,
   f.parent_zone_id,
   f.parent_zone_name,
-  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region,
+  -- Facilities usually attach to a district (parent = directional zone), but a
+  -- handful attach directly to a zone or region level - resolve the region from
+  -- whichever rung of the hierarchy the crosswalk recognises.
+  multiIf(
+    cw_parent.official_region != '', cw_parent.official_region,
+    cw_self.official_region   != '', cw_self.official_region,
+    'Unmapped'
+  ) as official_region,
   di.district_iso
 from {{ ref('mart_facility_directory') }} f
-left join {{ ref('region_crosswalk') }} cw
-  on f.parent_zone_name = cw.source_region
+left join {{ ref('region_crosswalk') }} cw_parent
+  on f.parent_zone_name = cw_parent.source_region
+left join {{ ref('region_crosswalk') }} cw_self
+  on f.geographic_zone_name = cw_self.source_region
 left join {{ ref('malawi_district_iso') }} di
-  on f.geographic_zone_name = di.zone_name
+  -- Same case/whitespace-insensitive match as mart_malawi_stock_status: the
+  -- source district strings drift ('Nkhata bay', 'Nkhota Kota').
+  on replaceRegexpAll(lowerUTF8(f.geographic_zone_name), '\\s', '')
+   = replaceRegexpAll(lowerUTF8(di.zone_name), '\\s', '')

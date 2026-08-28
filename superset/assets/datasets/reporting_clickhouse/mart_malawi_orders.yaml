@@ -288,7 +288,42 @@ columns:
     filterable: true
     expression: null
     description: "Total cost of the requisition line item (price_per_pack × packs_to_ship)"
+  - column_name: in_latest_month
+    verbose_name: In Latest Month
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "1 for rows in the most recent COMPLETE reporting month; the latest-month snapshot charts filter on it instead of a now-relative window, which goes blank whenever reporting lags."
+  - column_name: schedule_type
+    verbose_name: Schedule Type
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Reporting cadence (Weekly / Monthly / Quarterly / BUQ), inherited from the core mart. Lets the Schedule Type filter and cadence-split charts work on this dataset."
+  - column_name: in_complete_month
+    verbose_name: In Complete Month
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "1 when the row's month reached the completeness threshold (core mart_month_completeness); trend charts hide incomplete trailing months through this flag"
 metrics:
+  - metric_name: latest_period_end
+    verbose_name: "Latest Period End"
+    metric_type: null
+    expression: "MAX(period_end_date)"
+    description: "Most recent period end date; used by the dashboard Period filters to sort their values chronologically."
+    d3format: null
+    extra: null
+    warning_text: null
   - metric_name: count
     verbose_name: "COUNT(*)"
     metric_type: count

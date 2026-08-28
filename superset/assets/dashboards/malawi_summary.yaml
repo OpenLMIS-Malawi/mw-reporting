@@ -3,7 +3,16 @@ uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
 version: "1.0.0"
 description: "Executive summary for Malawi tracer products: district stockout map, programmatic stockout pivot, multi-program stockout trend, top stocked-out products, and current inventory snapshot per program."
 slug: malawi-summary
-css: ""
+css: |
+  /* Country Map: thicker, high-contrast district borders. The plugin draws
+     path.region with vector-effect: non-scaling-stroke and exposes no border
+     control, so the dashboard stylesheet is the supported place for this. */
+  .superset-legacy-chart-country-map path.region {
+    /* the plugin ships its own near-invisible stroke colour; the dashboard
+       stylesheet loads earlier, so the colour needs the bump */
+    stroke: #ffffff !important;
+    stroke-width: 1.6px;
+  }
 published: true
 certified_by: null
 certification_details: null
@@ -13,7 +22,7 @@ metadata:
   expanded_slices: {}
   refresh_frequency: 0
   default_filters: "{}"
-  color_scheme: supersetColors
+  color_scheme: null
   label_colors: {}
   color_scheme_domain: []
   shared_label_colors: []
@@ -89,7 +98,9 @@ metadata:
         inverseSelection: false
       type: NATIVE_FILTER
       description: ""
-      cascadeParentIds: []
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-region
       defaultDataMask:
         extraFormData: {}
         filterState:
@@ -114,7 +125,65 @@ metadata:
         inverseSelection: false
       type: NATIVE_FILTER
       description: "Filter by program reporting frequency (Weekly / Monthly / Quarterly / BUQ)."
-      cascadeParentIds: []
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-period
+      name: Period
+      filterType: filter_select
+      targets:
+        - column:
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+        sortAscending: false
+        sortMetric: latest_period_end
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-schedule-type
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-facility
+      name: Facility
+      filterType: filter_select
+      targets:
+        - column:
+            name: facility_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: true
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-region
+        - NATIVE_FILTER-district
       defaultDataMask:
         extraFormData: {}
         filterState:
@@ -142,6 +211,7 @@ position:
     id: ROW-treemap
     children:
       - CHART-treemap
+      - CHART-ranked
     parents:
       - ROOT_ID
       - GRID_ID
@@ -158,9 +228,23 @@ position:
     meta:
       chartId: 0
       height: 60
-      width: 12
+      width: 7
       sliceName: "Malawi: District Stock-Out Rate (Map)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
+  CHART-ranked:
+    type: CHART
+    id: CHART-ranked
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-treemap
+    meta:
+      chartId: 0
+      height: 60
+      width: 5
+      sliceName: "Malawi: District Stock-Out Rate (Ranked)"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000037"
   ROW-trend:
     type: ROW
     id: ROW-trend

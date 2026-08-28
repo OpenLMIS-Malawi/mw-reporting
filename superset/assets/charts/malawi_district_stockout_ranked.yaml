@@ -3,7 +3,7 @@ viz_type: echarts_timeseries_bar
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000037"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
-description: "Districts ranked by stock-out rate in the latest reporting month. Doubles as the map's legend: the value printed on each bar is the number behind the district's colour. Districts with no data in the period are not ranked - the map still names them as no-data on hover."
+description: "Districts ranked by stock-out rate in the latest complete reporting month. Doubles as the map's legend: the value printed on each bar is the number behind the district's colour. Districts with no data are not ranked here; on the map they read as 0% (product decision)."
 certified_by: null
 certification_details: null
 is_managed_externally: false

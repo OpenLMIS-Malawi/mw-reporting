@@ -55,9 +55,10 @@ models:
   - name: mart_malawi_stock_status
     description: >
       Malawi stock status: core stock status data enriched with Malawi
-      health program classification. Only includes products mapped to
-      a Malawi program in the malawi_program_products seed; programme
-      categories in var('denied_programs') are excluded.
+      specifics. malawi_program is the requisition's own program (live
+      program data - requisition templates derive from
+      referencedata.program_orderables); is_tracer flags the client-curated
+      HSSP tracer product list from the malawi_tracer_products seed.
     columns:
       - name: line_item_id
         description: Requisition line item UUID
@@ -65,9 +66,16 @@ models:
           - not_null
           - unique
       - name: malawi_program
-        description: "Malawi health program name (e.g., National Malaria Control Program, HIV/AIDS, TB)"
+        description: "Health program the line item was requisitioned under (live OpenLMIS program name, e.g. Malaria, HIV, TB)"
         tests:
           - not_null
+      - name: is_tracer
+        description: "1 when the product is on the client-curated HSSP tracer list (malawi_tracer_products seed)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
       - name: official_region
         description: >
           Standardised official region (Northern, Central, Southern) mapped
@@ -102,3 +110,83 @@ models:
                   - Monthly
                   - Quarterly
                   - BUQ
+      - name: in_latest_month
+        description: >
+          1 for rows in the most recent COMPLETE reporting month (see the
+          core mart_month_completeness; the newest month present in the data
+          is structurally partial). The latest-month snapshot charts
+          (district map, inventory snapshot) filter on this flag instead of
+          a now-relative window, which goes blank whenever reporting lags.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: in_complete_month
+        description: >
+          1 when the row's month reached the completeness threshold; trend
+          charts hide ragged trailing months through this flag.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: mart_malawi_reporting_status
+    description: >
+      Wrapper over the core mart_reporting_status with official_region.
+      Backs the Malawi Reporting Summary dashboard.
+    columns:
+      - name: schedule_type
+        description: "Reporting frequency (Weekly / Monthly / Quarterly / BUQ), inherited from the core mart_reporting_status; target of the dashboard's Schedule Type filter."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Weekly
+                  - Monthly
+                  - Quarterly
+                  - BUQ
+
+  - name: mart_malawi_stock_full
+    description: >
+      Unfiltered wrapper over the core mart_stock_status with official_region
+      and the in_latest_month snapshot flag. Shared by the Malawi Orders and
+      Malawi Consumption dashboards.
+    columns:
+      - name: in_latest_month
+        description: >
+          1 for rows in the most recent COMPLETE reporting month (see the
+          core mart_month_completeness). The latest-month snapshot charts
+          (order timeliness, most consumed products) filter on this flag
+          instead of a now-relative window, which goes blank whenever
+          reporting lags.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: in_complete_month
+        description: >
+          1 when the row's month reached the completeness threshold; trend
+          charts hide ragged trailing months through this flag.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: mart_malawi_district_stockout
+    description: >
+      District x program latest-month stock-out snapshot, zero-filled from the
+      malawi_district_iso seed so every district has a row per program. Backs
+      the Malawi Summary district map and its ranked companion chart.
+      stockout_rate is NULL (not 0) where a district has no data.
+    columns:
+      - name: district_iso
+        tests:
+          - not_null
+      - name: program_name
+        tests:
+          - not_null

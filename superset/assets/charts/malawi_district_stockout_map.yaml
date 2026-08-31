@@ -3,7 +3,7 @@ viz_type: country_map
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
-description: "Stock-out rate per district across all products in the latest complete reporting month, shown on a map of Malawi. Colour = actual stock-out % (green = low, red = high). Districts without data are shown as 0% (deepest green) by product decision; their zero comes from coalesce around the average, so districts that do have data keep their true mean. The ranked chart beside it doubles as the legend."
+description: "Stock-out rate per district across all products in the latest complete reporting month, shown on a map of Malawi. Colour = actual stock-out % (green = low, red = high). Districts without data are shown as 0% (deepest green) by product decision; their zero comes from coalesce around the average, so districts that do have data keep their true mean. With no program selected, the district value is the unweighted mean of its per-program rates: every program counts equally regardless of how many product lines it carries. The ranked chart beside it doubles as the legend."
 certified_by: null
 certification_details: null
 is_managed_externally: false

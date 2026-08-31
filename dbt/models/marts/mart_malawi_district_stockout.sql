@@ -13,6 +13,13 @@
 -- month carry a NULL stockout_rate (never 0 - zero would read as "fully
 -- stocked"), which lets the map show an honest "no data" hover instead of
 -- a nameless blank polygon.
+--
+-- Intended definition of the district-level rate: stockout_rate here is the
+-- share of stocked-out line items per district x program, and the map (with
+-- no program selected) averages those program-level rates UNWEIGHTED, so
+-- every program contributes equally regardless of how many product lines it
+-- carries. line_items is kept alongside so a line-weighted definition stays
+-- one metric change away if the product ever wants it.
 
 with districts as (
 

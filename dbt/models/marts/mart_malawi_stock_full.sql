@@ -7,21 +7,30 @@
   )
 }}
 
--- Malawi full stock wrapper: thin, UNFILTERED wrapper over the core
--- mart_stock_status that adds the official Malawi region (3-region crosswalk).
--- Shared by the Malawi Orders and Malawi Consumption dashboards — both need the
--- full, unfiltered stock rows with official_region (unlike mart_malawi_stock_status,
--- which is filtered to Malawi tracer products / denied programmes). Additive —
--- reads core via ref(), does NOT modify core -- MW-1482.
+-- Malawi full stock wrapper: thin wrapper over the core mart_stock_status
+-- that adds the official Malawi region (3-region crosswalk) and the month
+-- completeness flags, nothing else. Shared by the Malawi Orders and Malawi
+-- Consumption dashboards; the heavier mart_malawi_stock_status carries the
+-- extra Malawi enrichments (health program, tracer flag, district ISO) for
+-- the Stock dashboards. Additive: reads core via ref(), does not modify it.
 
 with base as (
 
   select
     f.*,
-    if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region
+    -- Same parent -> self -> Unmapped fallback as mart_malawi_stock_status:
+    -- facilities attached directly to a region-level zone have no crosswalk
+    -- entry for their parent, so their own zone resolves the region.
+    multiIf(
+      cw_parent.official_region != '', cw_parent.official_region,
+      cw_self.official_region   != '', cw_self.official_region,
+      'Unmapped'
+    ) as official_region
   from {{ ref('mart_stock_status') }} f
-  left join {{ ref('region_crosswalk') }} cw
-    on f.parent_zone_name = cw.source_region
+  left join {{ ref('region_crosswalk') }} cw_parent
+    on f.parent_zone_name = cw_parent.source_region
+  left join {{ ref('region_crosswalk') }} cw_self
+    on f.zone_name = cw_self.source_region
 
 ),
 

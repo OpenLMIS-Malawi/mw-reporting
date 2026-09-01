@@ -16,8 +16,25 @@ params:
     - stockout_rate
   groupby:
     - program_name
-  adhoc_filters: []
-  time_range: "Last 13 months"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 13 months"
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: ==
+      operatorId: EQUALS
+      subject: in_complete_month
+      comparator: 1
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: ==
+      operatorId: EQUALS
+      subject: is_tracer
+      comparator: 1
   row_limit: 10000
   order_desc: true
   color_scheme: supersetColors
@@ -25,9 +42,13 @@ params:
   legendType: scroll
   legendOrientation: top
   x_axis_title: Period
+  x_axis_title_margin: 30
   y_axis_title: Stockout Rate
+  y_axis_title_margin: 30
+  y_axis_title_position: Top
   y_axis_format: ".1%"
   rich_tooltip: true
+  showTooltipTotal: false
   tooltipTimeFormat: "%b %Y"
   show_value: false
   markerEnabled: true

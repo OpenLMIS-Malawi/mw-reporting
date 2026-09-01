@@ -2,8 +2,8 @@ slice_name: "Malawi: District Stock-Out Rate (Map)"
 viz_type: country_map
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
 version: "1.0.0"
-dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Stock-out rate per district across Malawi tracer products in the most recent month, shown on a map of Malawi. Colour = actual stock-out % (green = low, red = high); districts keyed by ISO 3166-2 code (district_iso)."
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
+description: "Stock-out rate per district across all products in the latest complete reporting month, shown on a map of Malawi. Colour = actual stock-out % (green = low, red = high). Districts without data are shown as 0% (deepest green) by product decision; their zero comes from coalesce around the average, so districts that do have data keep their true mean. With no program selected, the district value is the unweighted mean of its per-program rates: every program counts equally regardless of how many product lines it carries. The ranked chart beside it doubles as the legend."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -12,9 +12,11 @@ params:
   viz_type: country_map
   select_country: malawi
   entity: district_iso
-  metric: stockout_rate
+  metric:
+    expressionType: SQL
+    sqlExpression: "coalesce(AVG(stockout_rate), 0)"
+    label: "Stockout Rate"
   adhoc_filters: []
-  time_range: "Last month"
   row_limit: 1000
   linear_color_scheme: sequentialGreenToRed
   number_format: ",.1%"

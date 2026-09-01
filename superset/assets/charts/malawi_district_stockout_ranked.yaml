@@ -1,0 +1,37 @@
+slice_name: "Malawi: District Stock-Out Rate (Ranked)"
+viz_type: echarts_timeseries_bar
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000037"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
+description: "Districts ranked by stock-out rate in the latest complete reporting month. Doubles as the map's legend: the value printed on each bar is the number behind the district's colour. With no program selected, each district's value is the unweighted mean of its per-program rates (every program counts equally regardless of product-line count). Districts with no data are not ranked here; on the map they read as 0% (product decision)."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  orientation: horizontal
+  x_axis: zone_name
+  groupby: []
+  metrics:
+    - district_stockout_rate
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SQL
+      sqlExpression: "stockout_rate IS NOT NULL"
+      subject: stockout_rate
+  x_axis_sort: district_stockout_rate
+  x_axis_sort_asc: true
+  order_desc: true
+  row_limit: 50
+  color_scheme: supersetColors
+  show_legend: false
+  y_axis_title: Stock-Out Rate
+  y_axis_title_margin: 30
+  y_axis_format: ".1%"
+  truncateYAxis: false
+  rich_tooltip: true
+  showTooltipTotal: false
+  show_value: true
+  zoomable: false
+query_context: null

@@ -4,7 +4,7 @@ version: "1.0.0"
 database_uuid: "b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
 schema: curated
 main_dttm_col: period_end_date
-description: "Malawi logistics summary: core logistics-summary mart (top-5 consumed products, latest month) + official Malawi region. Backs the Malawi Consumption dashboard's Logistics Summary Report."
+description: "Malawi logistics summary: core logistics-summary mart (five most-consumed products of each program, latest month) + official Malawi region. Backs the Malawi Consumption dashboard's Logistics Summary Report."
 default_endpoint: null
 offset: 0
 cache_timeout: null

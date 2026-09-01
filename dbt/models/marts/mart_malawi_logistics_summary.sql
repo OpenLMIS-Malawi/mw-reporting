@@ -8,7 +8,7 @@
 }}
 
 -- Malawi logistics summary: thin wrapper over the core mart_logistics_summary
--- (top-5 most-consumed products, latest reporting month) that adds the official
+-- (five most-consumed products of each program, latest reporting month) + official
 -- Malawi region (3-region crosswalk). Additive — reads the core mart via ref(),
 -- does NOT modify core. Backs the "Malawi: Logistics Summary Report" chart and
 -- lets the dashboard Region filter (official_region) cascade to that chart -- MW-1482.

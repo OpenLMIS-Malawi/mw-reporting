@@ -4,7 +4,7 @@ version: "1.0.0"
 database_uuid: "b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
 schema: curated
 main_dttm_col: period_end_date
-description: "Malawi stock status with program classification — stockout trends by health program."
+description: "Malawi stock status per live health program (the requisition's own program) — stockout trends, with the client-curated tracer flag."
 default_endpoint: null
 offset: 0
 cache_timeout: null
@@ -171,7 +171,42 @@ columns:
     filterable: true
     expression: null
     description: null
+  - column_name: is_tracer
+    verbose_name: Is Tracer Product
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "1 when the product is on the client-curated HSSP tracer list (malawi_tracer_products seed)."
+  - column_name: in_latest_month
+    verbose_name: In Latest Month
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "1 for rows in the most recent COMPLETE reporting month; the latest-month snapshot charts filter on it instead of a now-relative window, which goes blank whenever reporting lags."
+  - column_name: in_complete_month
+    verbose_name: In Complete Month
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "1 when the row's month reached the completeness threshold (core mart_month_completeness); trend charts hide incomplete trailing months through this flag"
 metrics:
+  - metric_name: latest_period_end
+    verbose_name: "Latest Period End"
+    metric_type: null
+    expression: "MAX(period_end_date)"
+    description: "Most recent period end date; used by the dashboard Period filters to sort their values chronologically."
+    d3format: null
+    extra: null
+    warning_text: null
   - metric_name: stockout_rate
     verbose_name: "Stockout Rate"
     metric_type: null
@@ -196,8 +231,16 @@ metrics:
     d3format: null
     extra: null
     warning_text: null
+  - metric_name: pct_facilities_stocked_out
+    verbose_name: "% HF with ≥1 Stocked Out"
+    metric_type: null
+    expression: "uniqExactIf(facility_id, stock_status = 'Stocked Out') / nullIf(uniqExact(facility_id), 0)"
+    description: "Share of facilities that have at least one Stocked Out product. Overlapping indicator like the other %HF columns - a facility counts in every bucket it has a product in, so the columns do not sum to 100%."
+    d3format: ".1%"
+    extra: null
+    warning_text: null
   - metric_name: pct_facilities_understocked
-    verbose_name: "% HF Understocked"
+    verbose_name: "% HF with ≥1 Understocked"
     metric_type: null
     expression: "uniqExactIf(facility_id, stock_status = 'Understocked') / nullIf(uniqExact(facility_id), 0)"
     description: "Share of facilities that have at least one Understocked tracer product. Matches legacy '%HF Understocked' metric semantics."
@@ -205,7 +248,7 @@ metrics:
     extra: null
     warning_text: null
   - metric_name: pct_facilities_adequately_stocked
-    verbose_name: "% HF Adequately Stocked"
+    verbose_name: "% HF with ≥1 Adequate"
     metric_type: null
     expression: "uniqExactIf(facility_id, stock_status = 'Adequately stocked') / nullIf(uniqExact(facility_id), 0)"
     description: "Share of facilities that have at least one Adequately stocked tracer product. Matches legacy '%HF Adequately stocked' metric semantics."
@@ -213,7 +256,7 @@ metrics:
     extra: null
     warning_text: null
   - metric_name: pct_facilities_overstocked
-    verbose_name: "% HF Overstocked"
+    verbose_name: "% HF with ≥1 Overstocked"
     metric_type: null
     expression: "uniqExactIf(facility_id, stock_status = 'Overstocked') / nullIf(uniqExact(facility_id), 0)"
     description: "Share of facilities that have at least one Overstocked tracer product. Matches legacy '%HF Overstocked' metric semantics."

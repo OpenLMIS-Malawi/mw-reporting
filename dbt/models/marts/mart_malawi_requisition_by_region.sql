@@ -22,7 +22,14 @@ facilities as (
 
 select
   coalesce(f.parent_zone_name, f.geographic_zone_name)          as region,
-  if(empty(cw.official_region), 'Unmapped', cw.official_region) as official_region,
+  -- Same parent -> self -> Unmapped fallback as mart_malawi_stock_status:
+  -- facilities attached directly to a region-level zone have no crosswalk
+  -- entry for their parent, so their own zone resolves the region.
+  multiIf(
+    cw_parent.official_region != '', cw_parent.official_region,
+    cw_self.official_region   != '', cw_self.official_region,
+    'Unmapped'
+  )                                                              as official_region,
   r.program_name,
   r.status,
   count()                as requisition_count,
@@ -30,8 +37,10 @@ select
 from requisitions r
 left join facilities f
   on r.facility_code = f.facility_code
-left join {{ ref('region_crosswalk') }} cw
-  on coalesce(f.parent_zone_name, f.geographic_zone_name) = cw.source_region
+left join {{ ref('region_crosswalk') }} cw_parent
+  on f.parent_zone_name = cw_parent.source_region
+left join {{ ref('region_crosswalk') }} cw_self
+  on f.geographic_zone_name = cw_self.source_region
 group by
   region,
   official_region,

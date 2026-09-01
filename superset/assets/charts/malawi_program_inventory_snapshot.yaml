@@ -3,7 +3,7 @@ viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000035"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Current snapshot of facility-level stock status per OpenLMIS program for Malawi tracer products. Each metric is the share of facilities with at least one product in that stock-status bucket."
+description: "Latest-reporting-month snapshot of facility-level stock status per program. Each column is an independent indicator - the share of facilities with AT LEAST ONE product in that bucket - so a facility counts in every column it qualifies for and the columns do not sum to 100%."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -14,11 +14,17 @@ params:
   groupby:
     - program_name
   metrics:
+    - pct_facilities_stocked_out
     - pct_facilities_understocked
     - pct_facilities_adequately_stocked
     - pct_facilities_overstocked
-  adhoc_filters: []
-  time_range: "Last month"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: ==
+      operatorId: EQUALS
+      subject: in_latest_month
+      comparator: 1
   row_limit: 10000
   order_by_cols:
     - '["program_name", true]'

@@ -13,8 +13,8 @@ olmis-analytics-malawi/
   dbt/
     dbt_project.yml
     seeds/
-      malawi_program_products.csv        # Static reference list: programs × products
-                                         # marked as essential in Malawi
+      malawi_tracer_products.csv         # Client-curated HSSP tracer product list
+                                         # (flags is_tracer on the stock mart)
     models/
       marts/
         mart_malawi_requisition_by_region.sql
@@ -52,9 +52,9 @@ Note: extension packages do **not** include `connect/` or top-level `databases/`
 
 ## dbt models
 
-### Seed: `malawi_program_products`
+### Seed: `malawi_tracer_products`
 
-Static CSV listing the program × product pairs that are considered essential for Malawi reporting. Used by `mart_malawi_stock_status` to filter down to the country's vital-medicines basket. To customise for a different country, replace the rows in this CSV.
+Static CSV listing the client-curated HSSP tracer product codes. `mart_malawi_stock_status` exposes them as an `is_tracer` flag (the tracer trend chart filters on it); the mart itself is unfiltered — program classification comes from the requisition's own program, which follows the live `referencedata.program_orderables` catalog. To customise for a different country, replace the rows in this CSV or drop the flag.
 
 ### Mart: `mart_malawi_requisition_by_region`
 
@@ -92,7 +92,7 @@ Then run `make verify-packages` to validate, build, import, and verify.
 To create an extension for a different country:
 
 1. Copy this directory as a starting point — rename `manifest.yaml.name`, the dbt project name, and the asset UUIDs (UUIDs must be unique across packages).
-2. Replace `seeds/malawi_program_products.csv` with your country's reference data, or remove the seed entirely if you don't need country-specific filtering.
+2. Replace `seeds/malawi_tracer_products.csv` (and the region/district seeds) with your country's reference data, or remove them entirely if you don't need the tracer flag or region mapping.
 3. Adjust the dbt marts to your country's reporting needs. Read from core marts (`{{ ref('mart_requisition_summary') }}`, etc.) rather than directly from the raw layer.
 4. Replace the Superset charts and dashboards: author in the UI against your country's data, export with the import script, commit the YAML.
 5. Run `make package-validate` to ensure no UUID collisions with core.

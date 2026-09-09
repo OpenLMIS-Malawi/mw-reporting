@@ -218,7 +218,7 @@ position:
     id: GRID_ID
     children:
       - ROW-trend
-      - ROW-yoy
+      - ROW-consumption
       - ROW-district
       - ROW-products
       - ROW-logistics
@@ -246,47 +246,32 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Consumption Trend"
+      sliceName: "Malawi: Adjusted Consumption Trend"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000110"
-  ROW-yoy:
+  ROW-consumption:
     type: ROW
-    id: ROW-yoy
+    id: ROW-consumption
     children:
-      - CHART-current-year
-      - CHART-last-year
+      - CHART-consumption
     parents:
       - ROOT_ID
       - GRID_ID
     meta:
       background: BACKGROUND_TRANSPARENT
-  CHART-current-year:
+  CHART-consumption:
     type: CHART
-    id: CHART-current-year
+    id: CHART-consumption
     children: []
     parents:
       - ROOT_ID
       - GRID_ID
-      - ROW-yoy
+      - ROW-consumption
     meta:
       chartId: 0
       height: 50
-      width: 6
-      sliceName: "Malawi: Consumption — Current 12 Months"
+      width: 12
+      sliceName: "Malawi: Consumption by District"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000112"
-  CHART-last-year:
-    type: CHART
-    id: CHART-last-year
-    children: []
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - ROW-yoy
-    meta:
-      chartId: 0
-      height: 50
-      width: 6
-      sliceName: "Malawi: Consumption — Previous 12 Months"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000113"
   ROW-district:
     type: ROW
     id: ROW-district

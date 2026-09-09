@@ -2,16 +2,17 @@
   config(
     materialized='table',
     engine='MergeTree()',
-    order_by='(malawi_program, period_end_date, product_code)'
+    order_by='(program_name, period_end_date, product_code)'
   )
 }}
 
 -- Malawi stock status: extends the core mart_stock_status with
 -- Malawi-specific enrichments.
--- malawi_program is the requisition's own program: every line item is
--- reported inside one program's requisition, whose template comes from the
--- live referencedata.program_orderables catalog - so the classification
--- follows current program data without duplicating multi-program products.
+-- program_name is the requisition's own program, carried through from the
+-- core mart: every line item is reported inside one program's requisition,
+-- whose template comes from the live referencedata.program_orderables
+-- catalog - so the classification follows current program data without
+-- duplicating multi-program products.
 -- is_tracer flags the client-curated HSSP tracer product list
 -- (malawi_tracer_products seed - it has no live counterpart).
 -- official_region standardises the directional source region to the 3
@@ -59,7 +60,6 @@ select
   s.months_of_stock,
   s.combined_stockout,
   s.stock_status,
-  s.program_name as malawi_program,
   -- ClickHouse LEFT JOIN default-fills misses with '' (not NULL)
   if(tr.product_code != '', 1, 0) as is_tracer,
   -- Resolve the region from whichever rung of the zone hierarchy the
@@ -71,7 +71,8 @@ select
     cw_self.official_region   != '', cw_self.official_region,
     'Unmapped'
   ) as official_region,
-  di.district_iso
+  di.district_iso   as district_iso,
+  di.district_name  as district_name
 from {{ ref('mart_stock_status') }} s
 left join {{ ref('malawi_tracer_products') }} tr
   on s.product_code = tr.product_code
@@ -79,12 +80,30 @@ left join {{ ref('region_crosswalk') }} cw_parent
   on s.parent_zone_name = cw_parent.source_region
 left join {{ ref('region_crosswalk') }} cw_self
   on s.zone_name = cw_self.source_region
-left join {{ ref('malawi_district_iso') }} di
+left join (
+  -- Every spelling in the seed, each carrying its ISO code and ONE canonical
+  -- label for that code. The seed holds aliases (Mzimba, Mzimba North and
+  -- Mzimba South all resolve to MW-MZ), so a chart grouped on the raw source
+  -- zone name would split a single map polygon into several bars; grouping on
+  -- district_name keeps a district chart one-to-one with the map.
+  -- The inner key is aliased because the ClickHouse analyser keeps a join
+  -- key's output column qualified when the name exists on both sides.
+  select
+    replaceRegexpAll(lowerUTF8(d.zone_name), '\\s', '') as match_key,
+    d.district_iso                                     as district_iso,
+    c.district_name                                    as district_name
+  from {{ ref('malawi_district_iso') }} d
+  inner join (
+    select district_iso as canon_iso, min(zone_name) as district_name
+    from {{ ref('malawi_district_iso') }}
+    group by district_iso
+  ) c
+    on c.canon_iso = d.district_iso
+) di
   -- Case- and whitespace-insensitive match: the source zone names drift
   -- ('Nkhata bay' vs 'Nkhata Bay', 'Nkhota Kota' vs 'Nkhotakota'), and a
   -- miss here silently blanks the district on the Country Map.
-  on replaceRegexpAll(lowerUTF8(s.zone_name), '\\s', '')
-   = replaceRegexpAll(lowerUTF8(di.zone_name), '\\s', '')
+  on replaceRegexpAll(lowerUTF8(s.zone_name), '\\s', '') = di.match_key
 
 ),
 

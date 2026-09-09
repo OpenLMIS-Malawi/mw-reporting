@@ -1,0 +1,55 @@
+slice_name: "Malawi: Requisitions — Raw Data"
+viz_type: table
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000088"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+description: "Requisition counts by district, region, program, period and status, in a form you can sort, search and download. It carries the same figures as the chart above but reads them all: REJECTED with 20 requisitions is as legible here as AUTHORIZED with 134,149, which a bar chart on a linear scale cannot manage."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - geographic_zone_name
+    - official_region
+    - program_name
+    - period_name
+    - status
+  metrics:
+    - total_requisitions
+    - emergency_requisitions
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      subject: official_region
+      operator: IN
+      comparator:
+        - Northern
+        - Central
+        - Southern
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 3 years"
+  row_limit: null
+  order_by_cols: []
+  server_pagination: true
+  server_page_length: 25
+  order_desc: true
+  show_cell_bars: true
+  color_pn: false
+  table_timestamp_format: smart_date
+  page_length: 25
+  include_search: true
+  header_font_size: 0.6
+  cell_font_size: 0.6
+  column_config:
+    Requisitions:
+      d3NumberFormat: ",.0f"
+    Emergency Requisitions:
+      d3NumberFormat: ",.0f"
+query_context: null

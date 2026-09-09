@@ -20,6 +20,32 @@ metadata:
   cross_filters_enabled: false
   filter_bar_orientation: HORIZONTAL
   native_filter_configuration:
+    - id: NATIVE_FILTER-program
+      name: Program
+      filterType: filter_select
+      targets:
+        - column:
+            name: program_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: "Health program the requisition was raised under."
+      cascadeParentIds:
+        []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
     - id: NATIVE_FILTER-region
       name: Region
       filterType: filter_select
@@ -45,6 +71,114 @@ metadata:
         filterState:
           value: null
         ownState: {}
+    - id: NATIVE_FILTER-period
+      name: Period
+      filterType: filter_select
+      targets:
+        - column:
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+        sortAscending: false
+        sortMetric: latest_period_end
+      type: NATIVE_FILTER
+      description: "Processing period the requisition was raised for. Without it the counts have no stated timeframe: the mart holds three years."
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-schedule-type
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-schedule-type
+      name: Schedule Type
+      filterType: filter_select
+      targets:
+        - column:
+            name: schedule_type
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: "Filter by program reporting frequency (Weekly / Monthly / Quarterly / BUQ). Here that is EPI on the weekly schedule, 4,808 requisitions, against 164,604 monthly ones."
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-district
+      name: District
+      filterType: filter_select
+      targets:
+        - column:
+            name: geographic_zone_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: "District the requisition's facility belongs to."
+      cascadeParentIds:
+        - NATIVE_FILTER-region
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-requisition-type
+      name: Requisition type
+      filterType: filter_select
+      targets:
+        - column:
+            name: requisition_type
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: "Regular or emergency requisitions. Brian asked for this so the two are not read as one: combining them misrepresents the picture, because emergency requisitions are 2,651 of 169,412 and follow a different process."
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+
 position:
   DASHBOARD_VERSION_KEY: v2
   ROOT_ID:
@@ -79,7 +213,7 @@ position:
       - GRID_ID
       - ROW-malawi-1
     meta:
-      chartId: 0
+      chartId: 8801
       height: 50
       width: 12
       sliceName: "Malawi: Requisitions by Region"
@@ -88,23 +222,23 @@ position:
     type: ROW
     id: ROW-malawi-2
     children:
-      - CHART-malawi-status-1
+      - CHART-malawi-raw-1
     parents:
       - ROOT_ID
       - GRID_ID
     meta:
       background: BACKGROUND_TRANSPARENT
-  CHART-malawi-status-1:
+  CHART-malawi-raw-1:
     type: CHART
-    id: CHART-malawi-status-1
+    id: CHART-malawi-raw-1
     children: []
     parents:
       - ROOT_ID
       - GRID_ID
       - ROW-malawi-2
     meta:
-      chartId: 0
-      height: 50
+      chartId: 8802
+      height: 80
       width: 12
-      sliceName: "Malawi: Requisitions by Status"
-      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000036"
+      sliceName: "Malawi: Requisitions — Raw Data"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000088"

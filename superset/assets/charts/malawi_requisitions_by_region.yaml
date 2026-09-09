@@ -3,7 +3,7 @@ viz_type: echarts_timeseries_bar
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000011"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
-description: "Requisition counts per geographic region in Malawi."
+description: "Requisitions per region, split by workflow status. Use the filters above to narrow by program, district or period; the raw-data table below carries the same figures broken down further, and reads the small statuses that are invisible here — AUTHORIZED alone is four fifths of the total."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -12,12 +12,7 @@ params:
   viz_type: echarts_timeseries_bar
   x_axis: official_region
   metrics:
-    - expressionType: SIMPLE
-      column:
-        column_name: requisition_count
-        type: UInt64
-      aggregate: SUM
-      label: "Requisitions"
+    - total_requisitions
   groupby:
     - status
   adhoc_filters:
@@ -29,6 +24,12 @@ params:
         - Northern
         - Central
         - Southern
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 3 years"
   row_limit: 100
   order_desc: true
   color_scheme: supersetColors

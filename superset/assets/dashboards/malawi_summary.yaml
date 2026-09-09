@@ -292,7 +292,7 @@ position:
       chartId: 9004
       height: 60
       width: 12
-      sliceName: "Malawi: Avg. Stockout Rate (Tracer Products)"
+      sliceName: "Malawi: Avg. Stockout Rate (Tracer Products, Consuming Lines Only)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
   ROW-tables:
     type: ROW

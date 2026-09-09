@@ -1,9 +1,9 @@
-slice_name: "Malawi: Non Reporting Facilities"
+slice_name: "Malawi: Skipped Facilities"
 viz_type: table
-uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000068"
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000116"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000061"
-description: "Active facilities that did not submit a requisition for the selected period. These are reporting blind spots with no stock visibility. A row flagged Skipped is a period the facility deliberately skipped rather than went silent on; those rows stay here because the blind spot is the same either way, and the Skipped Facilities table beside this one is that subset on its own."
+description: "Facility-program-periods the facility deliberately skipped, as opposed to going silent. A skip is a legitimate outcome: every program in the data is configured with periods_skippable. Companion to Non Reporting Facilities, which still lists these rows so no count there moves; this table is the subset with the skip flag set."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -15,15 +15,20 @@ params:
     - program_name
     - period_name
     - zone_name
-    - was_skipped
   metrics:
     - expressionType: SIMPLE
       column:
-        column_name: reporting_status
-        type: String
+        column_name: was_skipped
+        type: BIGINT
       aggregate: COUNT
-      label: "Unreported Periods"
-  adhoc_filters: []
+      label: "Skipped Periods"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: "=="
+      operatorId: EQUALS
+      subject: was_skipped
+      comparator: 1
   row_limit: null
   order_by_cols: []
   server_pagination: true
@@ -37,6 +42,6 @@ params:
   header_font_size: 0.6
   cell_font_size: 0.6
   column_config:
-    Unreported Periods:
+    Skipped Periods:
       d3NumberFormat: ",.0f"
 query_context: null

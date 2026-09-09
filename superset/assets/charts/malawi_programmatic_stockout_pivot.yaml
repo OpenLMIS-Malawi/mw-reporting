@@ -1,4 +1,4 @@
-slice_name: "Malawi: Avg. Programmatic Stockout Rate (Last 12 Months)"
+slice_name: "Malawi: Avg. Stockout Rate (Tracer Products)"
 viz_type: pivot_table_v2
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
 version: "1.0.0"
@@ -31,7 +31,7 @@ params:
       operator: TEMPORAL_RANGE
       operatorId: TEMPORAL_RANGE
       subject: period_end_date
-      comparator: "Last 12 months"
+      comparator: "Last 3 years"
     - clause: WHERE
       expressionType: SIMPLE
       operator: ==

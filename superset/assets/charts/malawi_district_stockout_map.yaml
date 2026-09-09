@@ -2,8 +2,8 @@ slice_name: "Malawi: District Stock-Out Rate (Map)"
 viz_type: country_map
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
 version: "1.0.0"
-dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
-description: "Stock-out rate per district across all products in the latest complete reporting month, shown on a map of Malawi. Colour = actual stock-out % (green = low, red = high). Districts without data are shown as 0% (deepest green) by product decision; their zero comes from coalesce around the average, so districts that do have data keep their true mean. With no program selected, the district value is the unweighted mean of its per-program rates: every program counts equally regardless of how many product lines it carries. The ranked chart beside it doubles as the legend."
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+description: "Stock-out rate per district, shown on a map of Malawi. Colour = stock-out % (green = low, red = high). The rate is the share of reported product lines that were stocked out, the same definition every other stock-out chart in these dashboards uses, so a district can be read against the programme and product charts directly. Obeys the dashboard filter bar, Period included: with nothing selected it covers the last three years of complete months, and the ranked chart beside it doubles as the legend. A district with no reported lines in the selected period is left uncoloured rather than shown as 0%."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -12,11 +12,20 @@ params:
   viz_type: country_map
   select_country: malawi
   entity: district_iso
-  metric:
-    expressionType: SQL
-    sqlExpression: "coalesce(AVG(stockout_rate), 0)"
-    label: "Stockout Rate"
-  adhoc_filters: []
+  metric: stockout_rate
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 3 years"
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: "=="
+      operatorId: EQUALS
+      subject: in_complete_month
+      comparator: 1
   row_limit: 1000
   linear_color_scheme: sequentialGreenToRed
   number_format: ",.1%"

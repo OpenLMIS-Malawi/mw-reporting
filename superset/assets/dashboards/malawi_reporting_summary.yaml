@@ -1,7 +1,7 @@
 dashboard_title: "Malawi Reporting Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000069"
 version: "1.0.0"
-description: "Malawi executive reporting summary: reporting rate by program, timeliness, indicator pivot, annual rates, and the 12-month national trend — filterable by the three official Malawi regions."
+description: "Malawi executive reporting summary: reporting rate by program, timeliness, indicator pivot, annual rates, and the three-year national trend — filterable by the three official Malawi regions."
 slug: malawi-reporting-summary
 css: ""
 published: true
@@ -177,6 +177,7 @@ metadata:
           - 8905
           - 8906
           - 8907
+          - 8908
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false
@@ -216,6 +217,7 @@ metadata:
           - 8905
           - 8906
           - 8907
+          - 8908
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false

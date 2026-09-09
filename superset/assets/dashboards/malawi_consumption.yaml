@@ -1,7 +1,7 @@
 dashboard_title: "Malawi Consumption"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000120"
 version: "1.0.0"
-description: "Malawi consumption analytics: trend, year-over-year, per-district, top consumed products, and a logistics summary — with a Region filter on the three official Malawi regions."
+description: "Malawi consumption analytics: trend, consumption by district, per-district, top consumed products, and a logistics summary — with a Region filter on the three official Malawi regions."
 slug: malawi-consumption
 css: ""
 published: true

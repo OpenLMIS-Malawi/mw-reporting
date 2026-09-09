@@ -49,7 +49,10 @@ select
   r.schedule_type                                       as schedule_type,
 
   -- the directional source region, kept for parity with the previous mart
-  coalesce(f.parent_zone_name, f.geographic_zone_name)  as region,
+  -- '' is the miss here, not NULL: both columns are non-Nullable String, so a
+  -- coalesce would return the empty parent rather than falling back to the own zone
+  if(f.parent_zone_name != '', f.parent_zone_name, f.geographic_zone_name)
+                                                        as region,
   multiIf(
     cw_parent.official_region != '', cw_parent.official_region,
     cw_self.official_region   != '', cw_self.official_region,

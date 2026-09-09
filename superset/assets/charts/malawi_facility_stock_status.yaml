@@ -1,0 +1,74 @@
+slice_name: "Malawi: Current Stock Status by Facility"
+viz_type: table
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000087"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+description: "How many product lines sit in each stock status, for one facility and one program, in the latest reporting month. Search for a facility by name, or narrow with the filters above. Period does not apply: this is a current-state snapshot, like the Program Current Inventory Snapshot. A line counts as stocked out when it reports no stock on hand or recorded any stockout days in the period, so a line can read Stocked Out while still showing a small quantity. Unknown means consumption was zero or missing, so months of stock could not be worked out."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - facility_name
+    - zone_name
+    - program_name
+  metrics:
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Stocked Out')"
+      label: "Stocked Out"
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Understocked')"
+      label: "Understocked"
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Adequately stocked')"
+      label: "Adequately Stocked"
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Overstocked')"
+      label: "Overstocked"
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Unknown')"
+      label: "Unknown"
+    - expressionType: SQL
+      sqlExpression: "COUNT(*)"
+      label: "Product Lines"
+    - expressionType: SQL
+      sqlExpression: "countIf(stock_status = 'Stocked Out') / nullIf(COUNT(*), 0)"
+      label: "% Stocked Out"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: "=="
+      operatorId: EQUALS
+      subject: in_latest_month
+      comparator: 1
+  row_limit: null
+  order_by_cols: []
+  server_pagination: true
+  server_page_length: 25
+  order_desc: true
+  show_cell_bars: true
+  color_pn: false
+  table_timestamp_format: smart_date
+  page_length: 25
+  include_search: true
+  header_font_size: 0.6
+  cell_font_size: 0.6
+  column_config:
+    Stocked Out:
+      d3NumberFormat: ",.0f"
+    Understocked:
+      d3NumberFormat: ",.0f"
+    Adequately Stocked:
+      d3NumberFormat: ",.0f"
+    Overstocked:
+      d3NumberFormat: ",.0f"
+    Unknown:
+      d3NumberFormat: ",.0f"
+    Product Lines:
+      d3NumberFormat: ",.0f"
+    "% Stocked Out":
+      d3NumberFormat: ".1%"
+query_context: null

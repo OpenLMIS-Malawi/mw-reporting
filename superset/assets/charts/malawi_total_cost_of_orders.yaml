@@ -2,7 +2,7 @@ slice_name: "Malawi: Total Cost of Orders"
 viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000085"
 version: "1.0.0"
-dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
 description: "Per-facility line-item rows showing the total cost of each ordered product. Use the dashboard filters to scope by program, district, or period."
 certified_by: null
 certification_details: null
@@ -43,8 +43,6 @@ params:
   table_timestamp_format: smart_date
   page_length: 25
   include_search: true
-  header_font_size: 0.6
-  cell_font_size: 0.6
   column_config:
     facility_name:
       customColumnName: "Facility"

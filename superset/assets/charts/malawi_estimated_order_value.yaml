@@ -2,7 +2,7 @@ slice_name: "Malawi: Estimated Order Value"
 viz_type: echarts_timeseries_bar
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000084"
 version: "1.0.0"
-dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
 description: "Total order cost per district, summed over every requisition line in scope. It is a floor, not an exact total: about a fifth of ordered lines carry no price in the source, so they contribute nothing. Emergency requisitions are included — they never record a received quantity, which used to empty this chart entirely. Legacy chart was hardcoded to program_name = 'Essential Meds'; the migration drops that filter and exposes Program in the dashboard filter bar."
 certified_by: null
 certification_details: null

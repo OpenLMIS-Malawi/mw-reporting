@@ -1,4 +1,4 @@
-slice_name: "Malawi: Facilities Reporting Rate"
+slice_name: "Malawi: Reporting Rate Trend"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000062"
 version: "1.0.0"

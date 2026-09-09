@@ -292,7 +292,7 @@ position:
       chartId: 8901
       height: 50
       width: 12
-      sliceName: "Malawi: Facilities Reporting Rate"
+      sliceName: "Malawi: Reporting Rate Trend"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000062"
   CHART-timeliness:
     type: CHART

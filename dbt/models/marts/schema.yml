@@ -3,10 +3,30 @@ version: 2
 models:
   - name: mart_malawi_requisition_by_region
     description: >
-      Malawi regional requisition summary: requisition counts aggregated
-      by geographic region, program, and status. Extension mart built on
-      top of the core package's mart_requisition_summary and mart_facility_directory.
+      Malawi requisitions, one row per requisition, extending the core
+      mart_requisition_summary with the official Malawi region. Built on top of
+      the core package's mart_requisition_summary and mart_facility_directory.
+      It previously aggregated to region x program x status, which left the
+      dashboard with no period and no district to filter on; Superset aggregates
+      now, and the same rows serve the raw-data table.
     columns:
+      - name: requisition_id
+        description: Requisition UUID
+        tests:
+          - not_null
+          - unique
+      - name: geographic_zone_name
+        description: District the requisition's facility belongs to
+        tests:
+          - not_null
+      - name: period_name
+        description: Processing period the requisition was raised for
+        tests:
+          - not_null
+      - name: emergency
+        description: True when the requisition was raised outside the reporting schedule
+        tests:
+          - not_null
       - name: region
         description: Geographic region (parent zone or zone if no parent)
         tests:
@@ -47,25 +67,22 @@ models:
                   - RELEASED_WITHOUT_ORDER
                   - SKIPPED
                   - REJECTED
-      - name: requisition_count
-        description: Number of requisitions
-        tests:
-          - not_null
 
   - name: mart_malawi_stock_status
     description: >
       Malawi stock status: core stock status data enriched with Malawi
-      specifics. malawi_program is the requisition's own program (live
-      program data - requisition templates derive from
-      referencedata.program_orderables); is_tracer flags the client-curated
-      HSSP tracer product list from the malawi_tracer_products seed.
+      specifics. program_name comes straight from the core mart and is the
+      requisition's own program (live program data - requisition templates
+      derive from referencedata.program_orderables); is_tracer flags the
+      client-curated HSSP tracer product list from the malawi_tracer_products
+      seed.
     columns:
       - name: line_item_id
         description: Requisition line item UUID
         tests:
           - not_null
           - unique
-      - name: malawi_program
+      - name: program_name
         description: "Health program the line item was requisitioned under (live OpenLMIS program name, e.g. Malaria, HIV, TB)"
         tests:
           - not_null
@@ -93,6 +110,8 @@ models:
                   - Unmapped
       - name: district_iso
         description: "ISO 3166-2 district code (MW-XX) from the malawi_district_iso seed; Superset Country Map join key. Empty string when the facility's district is not in the seed."
+      - name: district_name
+        description: "Canonical district label for district_iso, one name per code. The seed carries spelling aliases (Mzimba, Mzimba North and Mzimba South all resolve to MW-MZ), so grouping a chart on the raw zone_name would split one map polygon into several bars; this column keeps a district chart one-to-one with the map."
       - name: stock_status
         tests:
           - not_null
@@ -176,17 +195,3 @@ models:
           - accepted_values:
               arguments:
                 values: [0, 1]
-
-  - name: mart_malawi_district_stockout
-    description: >
-      District x program latest-month stock-out snapshot, zero-filled from the
-      malawi_district_iso seed so every district has a row per program. Backs
-      the Malawi Summary district map and its ranked companion chart.
-      stockout_rate is NULL (not 0) where a district has no data.
-    columns:
-      - name: district_iso
-        tests:
-          - not_null
-      - name: program_name
-        tests:
-          - not_null

@@ -26,7 +26,7 @@ metadata:
       targets:
         - column:
             name: program_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -51,7 +51,7 @@ metadata:
       targets:
         - column:
             name: official_region
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -76,7 +76,7 @@ metadata:
       targets:
         - column:
             name: zone_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -103,7 +103,7 @@ metadata:
       targets:
         - column:
             name: period_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -132,7 +132,7 @@ metadata:
       targets:
         - column:
             name: schedule_type
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -158,7 +158,7 @@ metadata:
       targets:
         - column:
             name: facility_name
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
@@ -180,17 +180,18 @@ metadata:
         filterState:
           value: null
         ownState: {}
-    - id: NATIVE_FILTER-emergency
-      name: Emergency
+    - id: NATIVE_FILTER-status
+      name: Status
       filterType: filter_select
       targets:
         - column:
-            name: emergency
-          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000080"
+            name: requisition_status
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
       scope:
         rootPath:
           - ROOT_ID
-        excluded: []
+        excluded:
+          - 8705
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false
@@ -198,12 +199,114 @@ metadata:
         searchAllOptions: false
         inverseSelection: false
       type: NATIVE_FILTER
-      description: ""
+      description: "Which requisition statuses count as an order. Defaults to RELEASED, the point at which a requisition becomes an actual order. Vertical programmes rarely reach release, so a programme can look empty here — widen the selection to AUTHORIZED to see where its requisitions actually stop."
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value:
+            - RELEASED
+        ownState: {}
+    - id: NATIVE_FILTER-emergency
+      name: Order type
+      filterType: filter_select
+      targets:
+        - column:
+            name: order_type
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded:
+          - 8705
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: "Regular or emergency orders. Regular orders follow the reporting schedule; emergency orders are raised outside it."
       cascadeParentIds: []
       defaultDataMask:
         extraFormData: {}
         filterState:
           value: null
+        ownState: {}
+    - id: NATIVE_FILTER-on-time-through
+      name: On time through
+      filterType: filter_select
+      targets:
+        - column:
+            name: on_time_through_day
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded:
+          - 8701
+          - 8703
+          - 8704
+          - 8705
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: false
+        searchAllOptions: false
+        inverseSelection: false
+        sortAscending: true
+        sortMetric: submission_day
+      adhoc_filters:
+        - clause: WHERE
+          expressionType: SQL
+          sqlExpression: "submitted_date IS NOT NULL"
+          subject: submitted_date
+      type: NATIVE_FILTER
+      description: "Last day of the month that still counts as on time. Set to 10 by default."
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value:
+            - 10
+        ownState: {}
+    - id: NATIVE_FILTER-late-through
+      name: Late through
+      filterType: filter_select
+      targets:
+        - column:
+            name: late_through_day
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000100"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded:
+          - 8701
+          - 8703
+          - 8704
+          - 8705
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: false
+        searchAllOptions: false
+        inverseSelection: false
+        sortAscending: true
+        sortMetric: submission_day
+      adhoc_filters:
+        - clause: WHERE
+          expressionType: SQL
+          sqlExpression: "submitted_date IS NOT NULL"
+          subject: submitted_date
+      type: NATIVE_FILTER
+      description: "Last day of the month that counts as late rather than extreme late. Set to 15 by default."
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value:
+            - 15
         ownState: {}
 position:
   DASHBOARD_VERSION_KEY: v2
@@ -242,7 +345,7 @@ position:
       - GRID_ID
       - ROW-pies
     meta:
-      chartId: 0
+      chartId: 8701
       height: 50
       width: 6
       sliceName: "Malawi: Emergency vs Regular Orders"
@@ -256,7 +359,7 @@ position:
       - GRID_ID
       - ROW-pies
     meta:
-      chartId: 0
+      chartId: 8702
       height: 50
       width: 6
       sliceName: "Malawi: Order Timeliness"
@@ -280,7 +383,7 @@ position:
       - GRID_ID
       - ROW-bar
     meta:
-      chartId: 0
+      chartId: 8703
       height: 50
       width: 12
       sliceName: "Malawi: Estimated Order Value"
@@ -304,7 +407,7 @@ position:
       - GRID_ID
       - ROW-cost
     meta:
-      chartId: 0
+      chartId: 8704
       height: 50
       width: 12
       sliceName: "Malawi: Total Cost of Orders"
@@ -328,7 +431,7 @@ position:
       - GRID_ID
       - ROW-non-reporting
     meta:
-      chartId: 0
+      chartId: 8705
       height: 50
       width: 12
       sliceName: "Malawi: Non Reporting Facilities (Orders)"

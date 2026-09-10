@@ -170,7 +170,7 @@ metadata:
         searchAllOptions: false
         inverseSelection: false
       type: NATIVE_FILTER
-      description: "Regular or emergency requisitions. Brian asked for this so the two are not read as one: combining them misrepresents the picture, because emergency requisitions are 2,651 of 169,412 and follow a different process."
+      description: "Regular or emergency requisitions, split so the two are not read as one: combining them misrepresents the picture, because emergency requisitions are 2,651 of 169,412 and follow a different process."
       cascadeParentIds:
         - NATIVE_FILTER-program
       defaultDataMask:

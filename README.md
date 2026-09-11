@@ -36,7 +36,7 @@ olmis-analytics-malawi/
         malawi_program_stockout_trend.yaml
         malawi_programmatic_stockout_pivot.yaml
         malawi_requisitions_by_region.yaml
-        malawi_stock_levels_by_program.yaml
+        malawi_stock_status_distribution.yaml
         malawi_stockout_by_district.yaml
         malawi_stockout_by_product.yaml
         malawi_stockout_by_program.yaml

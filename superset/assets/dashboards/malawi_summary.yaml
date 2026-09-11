@@ -142,7 +142,8 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        excluded: []
+        excluded: 
+          - 9006
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false
@@ -226,9 +227,9 @@ position:
       - GRID_ID
       - ROW-treemap
     meta:
-      chartId: 0
-      height: 60
-      width: 7
+      chartId: 9001
+      height: 100
+      width: 4
       sliceName: "Malawi: District Stock-Out Rate (Map)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
   CHART-ranked:
@@ -240,9 +241,9 @@ position:
       - GRID_ID
       - ROW-treemap
     meta:
-      chartId: 0
-      height: 60
-      width: 5
+      chartId: 9002
+      height: 100
+      width: 8
       sliceName: "Malawi: District Stock-Out Rate (Ranked)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000037"
   ROW-trend:
@@ -264,10 +265,10 @@ position:
       - GRID_ID
       - ROW-trend
     meta:
-      chartId: 0
+      chartId: 9003
       height: 60
       width: 12
-      sliceName: "Malawi: Program Stockout Rate (Tracer Products, Last 13 Months)"
+      sliceName: "Malawi: Program Stockout Rate (Tracer Products)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000033"
   ROW-pivot:
     type: ROW
@@ -288,10 +289,10 @@ position:
       - GRID_ID
       - ROW-pivot
     meta:
-      chartId: 0
+      chartId: 9004
       height: 60
       width: 12
-      sliceName: "Malawi: Avg. Programmatic Stockout Rate (Last 12 Months)"
+      sliceName: "Malawi: Avg. Stockout Rate (Tracer Products, Consuming Lines Only)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
   ROW-tables:
     type: ROW
@@ -313,10 +314,10 @@ position:
       - GRID_ID
       - ROW-tables
     meta:
-      chartId: 0
+      chartId: 9005
       height: 70
       width: 6
-      sliceName: "Malawi: Product Stockout (Last 12 Months)"
+      sliceName: "Malawi: Tracer Product Stockouts"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000034"
   CHART-snapshot:
     type: CHART
@@ -327,7 +328,7 @@ position:
       - GRID_ID
       - ROW-tables
     meta:
-      chartId: 0
+      chartId: 9006
       height: 70
       width: 6
       sliceName: "Malawi: Program Current Inventory Snapshot"

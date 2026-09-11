@@ -3,8 +3,8 @@ uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000010"
 version: "1.0.0"
 database_uuid: "b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
 schema: curated
-main_dttm_col: null
-description: "Malawi regional requisition summary: counts by region, program, and status."
+main_dttm_col: period_end_date
+description: "Malawi requisitions, one row per requisition, with the official Malawi region. Backs the Malawi Requisition dashboard."
 default_endpoint: null
 offset: 0
 cache_timeout: null
@@ -18,33 +18,15 @@ normalize_columns: false
 always_filter_main_dttm: false
 is_managed_externally: false
 columns:
-  - column_name: region
-    verbose_name: Region
+  - column_name: requisition_id
+    verbose_name: Requisition ID
     is_dttm: false
     is_active: true
     type: String
-    groupby: true
-    filterable: true
+    groupby: false
+    filterable: false
     expression: null
-    description: null
-  - column_name: official_region
-    verbose_name: Region
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: "Standardised official region (Northern, Central, Southern) via the region_crosswalk seed."
-  - column_name: program_name
-    verbose_name: Program
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
+    description: "Requisition UUID."
   - column_name: status
     verbose_name: Status
     is_dttm: false
@@ -53,31 +35,164 @@ columns:
     groupby: true
     filterable: true
     expression: null
-    description: null
-  - column_name: requisition_count
-    verbose_name: Requisition Count
+    description: "Requisition workflow status: INITIATED, SUBMITTED, AUTHORIZED, IN_APPROVAL, APPROVED, RELEASED, RELEASED_WITHOUT_ORDER, SKIPPED, REJECTED."
+  - column_name: emergency
+    verbose_name: Emergency flag
     is_dttm: false
     is_active: true
-    type: UInt64
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: "True when the requisition was raised outside the reporting schedule."
+  - column_name: requisition_created_date
+    verbose_name: Created
+    is_dttm: true
+    is_active: true
+    type: DATETIME
     groupby: false
     filterable: true
     expression: null
-    description: null
-  - column_name: emergency_count
-    verbose_name: Emergency Count
-    is_dttm: false
+    description: "When the requisition was created."
+  - column_name: requisition_modified_date
+    verbose_name: Last Modified
+    is_dttm: true
     is_active: true
-    type: UInt64
+    type: DATETIME
     groupby: false
     filterable: true
     expression: null
-    description: null
+    description: "When the requisition was last modified. Not the submission date."
+  - column_name: facility_code
+    verbose_name: Facility Code
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Facility code."
+  - column_name: facility_name
+    verbose_name: Facility
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Facility name."
+  - column_name: geographic_zone_name
+    verbose_name: District
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "District the facility belongs to."
+  - column_name: parent_zone_name
+    verbose_name: Source Region
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Directional source region as held in referencedata (5 values), before the 3-region crosswalk."
+  - column_name: program_code
+    verbose_name: Program Code
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Program code."
+  - column_name: program_name
+    verbose_name: Program
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Health program the requisition was raised under."
+  - column_name: period_name
+    verbose_name: Period
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Processing period the requisition was raised for."
+  - column_name: schedule_type
+    verbose_name: Schedule Type
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Reporting frequency (Weekly / Monthly / Quarterly / BUQ), derived from the period length."
+  - column_name: period_end_date
+    verbose_name: Period End Date
+    is_dttm: true
+    is_active: true
+    type: DATETIME
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Last day of the processing period. The temporal column for this dataset."
+  - column_name: region
+    verbose_name: Source Region (resolved)
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "Parent zone, or the zone itself where the facility hangs directly off a region."
+  - column_name: official_region
+    verbose_name: Region
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: "One of the 3 official Malawi regions, mapped from the directional source region via the region_crosswalk seed. 'Unmapped' is the sentinel for a source region absent from the crosswalk."
+  - column_name: requisition_type
+    verbose_name: Requisition type
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: "CASE WHEN emergency THEN 'Emergency' ELSE 'Regular' END"
+    description: "Regular or emergency, read off the emergency flag. Regular requisitions follow the reporting schedule; emergency ones are raised outside it."
 metrics:
-  - metric_name: total_requisitions
-    verbose_name: "Total Requisitions"
+  - metric_name: latest_period_end
+    verbose_name: "Latest Period End"
     metric_type: null
-    expression: "SUM(requisition_count)"
-    description: Total number of requisitions across grouped rows
+    expression: "MAX(period_end_date)"
+    description: "Most recent period end date; used by the dashboard Period filter to sort its values chronologically."
     d3format: null
+    extra: null
+    warning_text: null
+  - metric_name: total_requisitions
+    verbose_name: Requisitions
+    metric_type: null
+    expression: "COUNT(DISTINCT requisition_id)"
+    description: "Distinct requisitions. One row is one requisition, so this is also the row count, but stated as distinct so a future join cannot inflate it."
+    d3format: ",.0f"
+    extra: null
+    warning_text: null
+  - metric_name: emergency_requisitions
+    verbose_name: Emergency Requisitions
+    metric_type: null
+    expression: "COUNT(DISTINCT if(emergency, requisition_id, null))"
+    description: "Distinct requisitions raised outside the reporting schedule."
+    d3format: ",.0f"
     extra: null
     warning_text: null

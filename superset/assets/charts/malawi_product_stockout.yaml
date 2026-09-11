@@ -1,9 +1,9 @@
-slice_name: "Malawi: Product Stockout (Last 12 Months)"
+slice_name: "Malawi: Tracer Product Stockouts"
 viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000034"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Tracer products with the most line-item stockouts in the last 12 months. Each row counts how many requisition line items had stock_on_hand = 0."
+description: "Tracer products with the most line-item stockouts. Each row counts how many requisition line items had stock_on_hand = 0."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -21,7 +21,7 @@ params:
       operator: TEMPORAL_RANGE
       operatorId: TEMPORAL_RANGE
       subject: period_end_date
-      comparator: "Last 12 months"
+      comparator: "Last 3 years"
     - clause: WHERE
       expressionType: SIMPLE
       operator: ==
@@ -44,8 +44,6 @@ params:
   table_timestamp_format: smart_date
   page_length: 25
   include_search: true
-  header_font_size: 0.6
-  cell_font_size: 0.6
   column_config:
     product_name:
       customColumnName: "Product"

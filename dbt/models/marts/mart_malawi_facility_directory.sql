@@ -8,7 +8,7 @@
 
 -- Malawi facility directory: extends the core mart_facility_directory with the
 -- official Malawi region (3-region crosswalk) and district ISO code. Additive —
--- reads the core mart via ref(), does NOT modify core -- MW-1482.
+-- reads the core mart via ref(), does NOT modify core.
 
 select
   f.facility_id,

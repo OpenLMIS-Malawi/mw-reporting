@@ -244,7 +244,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Health Program"
+      sliceName: "Malawi: Stockout Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000021"
   ROW-mw-stockout-2:
     type: ROW

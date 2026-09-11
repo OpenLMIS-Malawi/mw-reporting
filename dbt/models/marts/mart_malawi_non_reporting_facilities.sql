@@ -9,9 +9,7 @@
 
 -- Malawi non-reporting facilities: thin wrapper over the core
 -- mart_non_reporting_facilities that adds the official Malawi region (3-region
--- crosswalk). Uses `f.*` because the core mart exposes a column named literally
--- `e.facility_id` (an upstream alias-prefixed name), so an explicit `f.facility_id`
--- select fails. Additive — reads core via ref(), does NOT modify core -- MW-1482.
+-- crosswalk). Additive — reads core via ref(), does NOT modify core.
 -- Shared by the Malawi Reporting Summary and Malawi Orders dashboards.
 
 select

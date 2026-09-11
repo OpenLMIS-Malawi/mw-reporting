@@ -107,7 +107,8 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        excluded: []
+        excluded:
+          - 8402
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false
@@ -152,6 +153,34 @@ metadata:
         filterState:
           value: null
         ownState: {}
+    - id: NATIVE_FILTER-facility
+      name: Facility
+      filterType: filter_select
+      targets:
+        - column:
+            name: facility_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: true
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-region
+        - NATIVE_FILTER-district
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
     - id: NATIVE_FILTER-product
       name: Product
       filterType: filter_select
@@ -190,6 +219,7 @@ position:
     id: GRID_ID
     children:
       - ROW-mw-stock-levels
+      - ROW-mw-facility-status
     parents:
       - ROOT_ID
   ROW-mw-stock-levels:
@@ -211,8 +241,32 @@ position:
       - GRID_ID
       - ROW-mw-stock-levels
     meta:
-      chartId: 0
+      chartId: 8401
       height: 60
       width: 12
-      sliceName: "Malawi: Stock Levels by Program"
+      sliceName: "Malawi: Stock Status Distribution Over Time"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000025"
+  ROW-mw-facility-status:
+    type: ROW
+    id: ROW-mw-facility-status
+    children:
+      - CHART-mw-facility-status
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-facility-status:
+    type: CHART
+    id: CHART-mw-facility-status
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-facility-status
+    meta:
+      chartId: 8402
+      height: 80
+      width: 12
+      sliceName: "Malawi: Current Stock Status by Facility"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000087"

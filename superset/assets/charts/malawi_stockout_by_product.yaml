@@ -1,9 +1,9 @@
-slice_name: "Malawi: Stockout Rate by Product"
+slice_name: "Malawi: Stockout Rate by Product (12 most affected)"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Stockout rate trends over time per product, filterable by health program."
+description: "Stockout rate over time for the twelve products with the most stocked-out line items in the current filter selection. The ranking is recomputed whenever a filter changes, so the twelve shown are the worst within whatever Program, Region, District or Facility is selected. Use the Product filter to follow a specific product instead."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -31,7 +31,21 @@ params:
       operatorId: EQUALS
       subject: in_complete_month
       comparator: 1
-  row_limit: 1000
+  # Cap the number of series, not the number of rows. Without series_limit the
+  # only bound is row_limit, which is a LIMIT on the flat product x month
+  # result: 2,564 products over ~37 months is about 52,800 rows against a limit
+  # of 1,000, and with order_desc the thousand kept were drawn from the 1,617
+  # rows sitting at exactly 1.0. Every series then rendered pinned at 100%
+  # against a true overall rate of 0.53. Verified on the deployed instance: with
+  # these two keys the query gains an inner top-N subquery and returns 432 rows.
+  #
+  # Rank by stockout_count (SUM) and not by stockout_rate (AVG): 27 products sit
+  # at exactly 1.0 and 22 of those have fewer than 50 observations, so ranking by
+  # rate rebuilds the same flat-100% chart through a different route.
+  series_limit: 12
+  series_limit_metric: stockout_count
+  # Headroom so the row limit can never select which rows come back again.
+  row_limit: 10000
   order_desc: true
   color_scheme: supersetColors
   show_legend: true

@@ -1,7 +1,7 @@
 dashboard_title: "Malawi Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
 version: "1.0.0"
-description: "Executive summary for Malawi tracer products: district stockout map, programmatic stockout pivot, multi-program stockout trend, top stocked-out products, and current inventory snapshot per program."
+description: "Executive summary for Malawi: district stockout map, programmatic stockout pivot, multi-program stockout trend, tracer product stockouts, and current inventory snapshot per program. All charts except the tracer product table answer the Program filter."
 slug: malawi-summary
 css: |
   /* Country Map: thicker, high-contrast district borders. The plugin draws
@@ -56,16 +56,17 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        # 9003, 9004 and 9005 are the three tracer-scoped charts. The tracer
-        # list is a curated set of products that only ever appear on Essential
-        # Meds requisitions, so intersecting it with any other programme is
-        # empty by construction and the charts render "No results were
-        # returned for this query". Leaving them in scope makes a structural
-        # emptiness look like a broken chart. They keep every other filter,
-        # because tracer products do span regions, districts and facilities.
+        # 9005 is the tracer product table. The tracer list is a curated set of
+        # products that only ever appear on Essential Meds requisitions, so
+        # intersecting it with any other programme is empty by construction and
+        # the chart would render "No results were returned for this query".
+        # It keeps every other filter, because tracer products do span regions,
+        # districts and facilities.
+        # 9003 and 9004 were excluded here too until they stopped being
+        # tracer-scoped. They group by programme, so scoping them to a list that
+        # lives entirely in one programme made them structurally incapable of
+        # drawing more than one series. They answer this filter now.
         excluded:
-          - 9003
-          - 9004
           - 9005
       controlValues:
         enableEmptyFilter: false
@@ -146,15 +147,13 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        # Same three tracer charts as the Program filter above, for the same
-        # reason one step removed: measured on dev, every tracer line is
-        # Essential Meds on a Monthly schedule (17 products, 330,388 lines and
-        # no other combination), so this filter selects Program by proxy and
-        # picking Weekly, Quarterly or BUQ blanks the three charts exactly as
-        # picking another programme did.
+        # Same tracer table as the Program filter above, for the same reason one
+        # step removed: measured on dev, every tracer line is Essential Meds on
+        # a Monthly schedule (17 products, 330,388 lines and no other
+        # combination), so this filter selects Program by proxy and picking
+        # Weekly, Quarterly or BUQ would blank the chart exactly as picking
+        # another programme did.
         excluded:
-          - 9003
-          - 9004
           - 9005
       controlValues:
         enableEmptyFilter: false
@@ -307,7 +306,7 @@ position:
       chartId: 9003
       height: 60
       width: 12
-      sliceName: "Malawi: Program Stockout Rate (Tracer Products)"
+      sliceName: "Malawi: Program Stockout Rate"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000033"
   ROW-pivot:
     type: ROW
@@ -331,7 +330,7 @@ position:
       chartId: 9004
       height: 60
       width: 12
-      sliceName: "Malawi: Avg. Stockout Rate (Tracer Products, Consuming Lines Only)"
+      sliceName: "Malawi: Avg. Stockout Rate (Consuming Lines Only)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
   ROW-tables:
     type: ROW

@@ -1,4 +1,4 @@
-slice_name: "Malawi: Stockout Rate by Product (12 most affected)"
+slice_name: "Malawi: Stockout Rate by Product (12 with the most stocked-out lines)"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
 version: "1.0.0"

@@ -271,7 +271,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Product (12 most affected)"
+      sliceName: "Malawi: Stockout Rate by Product (12 with the most stocked-out lines)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
   ROW-mw-stockout-3:
     type: ROW

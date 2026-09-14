@@ -16,8 +16,14 @@ params:
     - expressionType: SQL
       sqlExpression: "AVG(combined_stockout)"
       label: "Stockout Rate"
+  # district_name, not zone_name: the reference data holds Mzimba as two zones
+  # (North and South), so grouping on the raw zone drew 29 lines against the
+  # 28 polygons the country map keys off district_iso, and split Mzimba's
+  # numbers in half. Measured on dev: North 0.4392 over 446,436 lines, South
+  # 0.5889 over 357,545, merging to 0.5058 over 803,981. That merged figure is
+  # a re-aggregation over all the lines, not the mean of the two.
   groupby:
-    - zone_name
+    - district_name
   adhoc_filters:
     - clause: WHERE
       expressionType: SIMPLE
@@ -31,7 +37,12 @@ params:
       operatorId: EQUALS
       subject: in_complete_month
       comparator: 1
-  row_limit: 1000
+  # Districts times months, so the result sits just over a thousand rows and the
+  # old limit of 1,000 was cutting it: measured 1,044 rows on dev against the
+  # limit, and with order_desc the rows dropped were the lowest rates, so the
+  # chart quietly hid its best-performing district-months. Ten thousand leaves
+  # room for the window to widen without this recurring.
+  row_limit: 10000
   order_desc: true
   color_scheme: supersetColors
   show_legend: true

@@ -82,7 +82,10 @@ columns:
     expression: null
     description: null
   - column_name: zone_name
-    verbose_name: District
+    # "Zone", not "District": district_name below is also labelled District,
+    # and two identical labels in the column picker is how the wrong one gets
+    # chosen. This is the raw reference-data zone, which splits Mzimba in two.
+    verbose_name: Zone
     is_dttm: false
     is_active: true
     type: String

@@ -143,7 +143,16 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        excluded: []
+        # Same three tracer charts as the Program filter above, for the same
+        # reason one step removed: measured on dev, every tracer line is
+        # Essential Meds on a Monthly schedule (17 products, 330,388 lines and
+        # no other combination), so this filter selects Program by proxy and
+        # picking Weekly, Quarterly or BUQ blanks the three charts exactly as
+        # picking another programme did.
+        excluded:
+          - 9003
+          - 9004
+          - 9005
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false

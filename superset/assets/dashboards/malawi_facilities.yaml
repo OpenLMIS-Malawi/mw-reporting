@@ -37,6 +37,25 @@ metadata:
         multiSelect: true
         searchAllOptions: false
         inverseSelection: false
+      # Pre-filter for the dropdown only. Superset applies a native filter's own
+      # adhoc_filters to the query that builds its OPTION LIST, never to the
+      # charts, so nothing is hidden from the data: a disabled facility still
+      # appears in any chart that legitimately counts it. Two records are the
+      # reason this is here. NS121 Kalimanjira Health Centre and a system record
+      # coded "program" named "Programs" are both disabled and both attached to
+      # the country-level zone "Malawi" instead of a district, which is what put
+      # "Unmapped" in the Region list and "Malawi" in the District list.
+      # TO BRING DISABLED FACILITIES BACK: delete this comment and the five
+      # adhoc_filters lines below it. There are three identical copies in this
+      # file, one each in NATIVE_FILTER-region, NATIVE_FILTER-district and
+      # NATIVE_FILTER-type. Removing one only affects that dropdown. Nothing
+      # outside this file is involved: no dbt model, no dataset, no other
+      # dashboard.
+      adhoc_filters:
+        - clause: WHERE
+          expressionType: SQL
+          sqlExpression: "facility_enabled = true"
+          subject: facility_enabled
       type: NATIVE_FILTER
       description: ""
       cascadeParentIds: []
@@ -62,6 +81,25 @@ metadata:
         multiSelect: true
         searchAllOptions: false
         inverseSelection: false
+      # Pre-filter for the dropdown only. Superset applies a native filter's own
+      # adhoc_filters to the query that builds its OPTION LIST, never to the
+      # charts, so nothing is hidden from the data: a disabled facility still
+      # appears in any chart that legitimately counts it. Two records are the
+      # reason this is here. NS121 Kalimanjira Health Centre and a system record
+      # coded "program" named "Programs" are both disabled and both attached to
+      # the country-level zone "Malawi" instead of a district, which is what put
+      # "Unmapped" in the Region list and "Malawi" in the District list.
+      # TO BRING DISABLED FACILITIES BACK: delete this comment and the five
+      # adhoc_filters lines below it. There are three identical copies in this
+      # file, one each in NATIVE_FILTER-region, NATIVE_FILTER-district and
+      # NATIVE_FILTER-type. Removing one only affects that dropdown. Nothing
+      # outside this file is involved: no dbt model, no dataset, no other
+      # dashboard.
+      adhoc_filters:
+        - clause: WHERE
+          expressionType: SQL
+          sqlExpression: "facility_enabled = true"
+          subject: facility_enabled
       type: NATIVE_FILTER
       description: ""
       cascadeParentIds:
@@ -88,6 +126,25 @@ metadata:
         multiSelect: true
         searchAllOptions: false
         inverseSelection: false
+      # Pre-filter for the dropdown only. Superset applies a native filter's own
+      # adhoc_filters to the query that builds its OPTION LIST, never to the
+      # charts, so nothing is hidden from the data: a disabled facility still
+      # appears in any chart that legitimately counts it. Two records are the
+      # reason this is here. NS121 Kalimanjira Health Centre and a system record
+      # coded "program" named "Programs" are both disabled and both attached to
+      # the country-level zone "Malawi" instead of a district, which is what put
+      # "Unmapped" in the Region list and "Malawi" in the District list.
+      # TO BRING DISABLED FACILITIES BACK: delete this comment and the five
+      # adhoc_filters lines below it. There are three identical copies in this
+      # file, one each in NATIVE_FILTER-region, NATIVE_FILTER-district and
+      # NATIVE_FILTER-type. Removing one only affects that dropdown. Nothing
+      # outside this file is involved: no dbt model, no dataset, no other
+      # dashboard.
+      adhoc_filters:
+        - clause: WHERE
+          expressionType: SQL
+          sqlExpression: "facility_enabled = true"
+          subject: facility_enabled
       type: NATIVE_FILTER
       description: ""
       cascadeParentIds:

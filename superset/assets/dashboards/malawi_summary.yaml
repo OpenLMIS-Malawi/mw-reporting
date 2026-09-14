@@ -111,7 +111,10 @@ metadata:
       filterType: filter_select
       targets:
         - column:
-            name: zone_name
+            # district_name so the dropdown offers the same 28 districts the map
+            # draws. On zone_name it offered 29, listing Mzimba North and Mzimba
+            # South next to a chart that now draws one bar called Mzimba.
+            name: district_name
           datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
       scope:
         rootPath:

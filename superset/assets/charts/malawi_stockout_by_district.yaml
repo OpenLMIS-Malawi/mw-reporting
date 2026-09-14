@@ -16,8 +16,14 @@ params:
     - expressionType: SQL
       sqlExpression: "AVG(combined_stockout)"
       label: "Stockout Rate"
+  # district_name, not zone_name: the reference data holds Mzimba as two zones
+  # (North and South), so grouping on the raw zone drew 29 lines against the
+  # 28 polygons the country map keys off district_iso, and split Mzimba's
+  # numbers in half. Measured on dev: North 0.4392 over 446,436 lines, South
+  # 0.5889 over 357,545, merging to 0.5058 over 803,981. That merged figure is
+  # a re-aggregation over all the lines, not the mean of the two.
   groupby:
-    - zone_name
+    - district_name
   adhoc_filters:
     - clause: WHERE
       expressionType: SIMPLE

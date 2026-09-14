@@ -13,6 +13,23 @@ css: |
     stroke: #ffffff !important;
     stroke-width: 1.6px;
   }
+  /* A district the current filters return no rows for is absent from the
+     result, and the plugin paints an unmatched region with fill: none. On a
+     white card that reads as the district having been removed rather than
+     having no data, and the white stroke above hides it completely. Grey it
+     instead. Both spellings are matched because the browser decides how it
+     serialises the inline style the plugin writes.
+     Do NOT solve this by filling absent districts with 0 instead: on a
+     green-to-red scale a 0 paints them as the best performers, and getting
+     there costs the Period filter, which is why the pre-aggregated district
+     mart was dropped. That trade has been reversed three times already.
+     This rule goes once the deployed Superset greys unmatched regions
+     itself. It only applies on the dashboard, so the chart opened standalone
+     in Explore still shows the gaps as white. */
+  .superset-legacy-chart-country-map path.region[style*="fill: none"],
+  .superset-legacy-chart-country-map path.region[style*="fill:none"] {
+    fill: #d9d9d9 !important;
+  }
 published: true
 certified_by: null
 certification_details: null
@@ -39,7 +56,17 @@ metadata:
       scope:
         rootPath:
           - ROOT_ID
-        excluded: []
+        # 9003, 9004 and 9005 are the three tracer-scoped charts. The tracer
+        # list is a curated set of products that only ever appear on Essential
+        # Meds requisitions, so intersecting it with any other programme is
+        # empty by construction and the charts render "No results were
+        # returned for this query". Leaving them in scope makes a structural
+        # emptiness look like a broken chart. They keep every other filter,
+        # because tracer products do span regions, districts and facilities.
+        excluded:
+          - 9003
+          - 9004
+          - 9005
       controlValues:
         enableEmptyFilter: false
         defaultToFirstItem: false

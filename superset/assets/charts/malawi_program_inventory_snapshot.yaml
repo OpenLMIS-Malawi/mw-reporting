@@ -3,7 +3,7 @@ viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000035"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Latest-reporting-month snapshot of facility-level stock status per program. Each column is an independent indicator - the share of facilities with AT LEAST ONE product in that bucket - so a facility counts in every column it qualifies for and the columns do not sum to 100%."
+description: "Latest-reporting-month snapshot of facility-level stock status per program. It shows one month, the most recent whose stock reporting is complete, which is why the Period filter is deliberately switched off for it. A programme with no reported lines in that one month does not appear here at all, which is why a programme can be selectable in the Program filter and still leave this chart empty. The other charts on this page, which the Period filter governs, will still show it. Each column is an independent indicator - the share of facilities with AT LEAST ONE product in that bucket - so a facility counts in every column it qualifies for and the columns do not sum to 100%."
 certified_by: null
 certification_details: null
 is_managed_externally: false

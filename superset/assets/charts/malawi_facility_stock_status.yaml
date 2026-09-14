@@ -3,7 +3,7 @@ viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000087"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "How many product lines sit in each stock status, for one facility and one program, in the latest reporting month. Search for a facility by name, or narrow with the filters above. Period does not apply: this is a current-state snapshot, like the Program Current Inventory Snapshot. A line counts as stocked out when it reports no stock on hand or recorded any stockout days in the period, so a line can read Stocked Out while still showing a small quantity. Unknown means consumption was zero or missing, so months of stock could not be worked out."
+description: "How many product lines sit in each stock status, for one facility and one program, in the latest reporting month. Search for a facility by name, or narrow with the filters above. Period does not apply: this is a snapshot of one month, the most recent whose stock reporting is complete, like the Program Current Inventory Snapshot. A programme with no reported lines in that one month does not appear here at all, which is why a programme can be selectable in the Program filter and still leave this chart empty. The other charts on this page, which the Period filter governs, will still show it. A line counts as stocked out when it reports no stock on hand or recorded any stockout days in the period, so a line can read Stocked Out while still showing a small quantity. Unknown means consumption was zero or missing, so months of stock could not be worked out."
 certified_by: null
 certification_details: null
 is_managed_externally: false

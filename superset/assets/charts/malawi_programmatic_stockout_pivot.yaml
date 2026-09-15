@@ -1,9 +1,9 @@
-slice_name: "Malawi: Avg. Stockout Rate (Tracer Products, Consuming Lines Only)"
+slice_name: "Malawi: Avg. Stockout Rate (Consuming Lines Only)"
 viz_type: pivot_table_v2
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Average stockout rate by period × OpenLMIS program for Malawi tracer products, counting only lines with consumption. That filter drops 145,032 of 301,201 tracer lines, so this reads 22.9% for Essential Meds where Program Stockout Rate beside it reads 43.2% over the same window: same products, different denominator. Excludes line items with no consumption (average_consumption = 0 or null) so unused products do not skew the rate."
+description: "Average stockout rate by period × OpenLMIS program, counting only lines that had consumption. That filter drops 3,043,641 of 4,874,072 Essential Meds lines, so this reads 27% for Essential Meds where Program Stockout Rate beside it reads 55.1% over the same window: same products, different denominator. Excludes line items with no consumption (average_consumption = 0 or null) so unused products do not skew the rate."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -37,12 +37,6 @@ params:
       operator: ==
       operatorId: EQUALS
       subject: in_complete_month
-      comparator: 1
-    - clause: WHERE
-      expressionType: SIMPLE
-      operator: ==
-      operatorId: EQUALS
-      subject: is_tracer
       comparator: 1
   row_limit: 10000
   aggregateFunction: Average

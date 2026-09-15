@@ -1,9 +1,9 @@
-slice_name: "Malawi: Program Stockout Rate (Tracer Products)"
+slice_name: "Malawi: Program Stockout Rate"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000033"
 version: "1.0.0"
 dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
-description: "Stockout rate over time per OpenLMIS program for Malawi tracer products. Replaces the legacy 'time_table' viz (removed in Superset 5+) with a multi-series line — same metric, monthly trend instead of discrete current/3mo/6mo/12mo columns."
+description: "Stockout rate over time per OpenLMIS program, one line per programme, so selecting programmes in the filter bar shows those programmes. Replaces the legacy 'time_table' viz (removed in Superset 5+) with a multi-series line: same metric, monthly trend instead of discrete current/3mo/6mo/12mo columns."
 certified_by: null
 certification_details: null
 is_managed_externally: false
@@ -28,12 +28,6 @@ params:
       operator: ==
       operatorId: EQUALS
       subject: in_complete_month
-      comparator: 1
-    - clause: WHERE
-      expressionType: SIMPLE
-      operator: ==
-      operatorId: EQUALS
-      subject: is_tracer
       comparator: 1
   row_limit: 10000
   order_desc: true

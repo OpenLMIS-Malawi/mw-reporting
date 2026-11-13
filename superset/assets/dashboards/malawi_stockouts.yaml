@@ -250,7 +250,7 @@ position:
       chartId: 9101
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Program"
+      sliceName: "Stockout Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000021"
   ROW-mw-stockout-2:
     type: ROW
@@ -274,7 +274,7 @@ position:
       chartId: 9102
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Product (12 with the most stocked-out lines)"
+      sliceName: "Stockout Rate by Product (12 with the most stocked-out lines)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
   ROW-mw-stockout-3:
     type: ROW
@@ -298,7 +298,7 @@ position:
       chartId: 9103
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by District"
+      sliceName: "Stockout Rate by District"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000024"
   ROW-mw-stockout-4:
     type: ROW
@@ -322,7 +322,7 @@ position:
       chartId: 9104
       height: 50
       width: 12
-      sliceName: "Malawi: Stock Status Overview"
+      sliceName: "Stock Status Overview"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000123"
   ROW-mw-stockout-5:
     type: ROW
@@ -347,7 +347,7 @@ position:
       chartId: 9105
       height: 50
       width: 6
-      sliceName: "Malawi: Most Stocked Out Facilities"
+      sliceName: "Most Stocked Out Facilities"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000124"
   CHART-mw-top-products:
     type: CHART
@@ -361,7 +361,7 @@ position:
       chartId: 9106
       height: 50
       width: 6
-      sliceName: "Malawi: Most Stocked Out Products"
+      sliceName: "Most Stocked Out Products"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000125"
   ROW-mw-stockout-6:
     type: ROW
@@ -385,5 +385,5 @@ position:
       chartId: 9107
       height: 50
       width: 12
-      sliceName: "Malawi: Most Stocked Out Districts"
+      sliceName: "Most Stocked Out Districts"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000126"

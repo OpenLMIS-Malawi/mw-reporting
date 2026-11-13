@@ -192,7 +192,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Facilities per Region"
+      sliceName: "Facilities per Region"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000042"
   ROW-list:
     type: ROW
@@ -216,5 +216,5 @@ position:
       chartId: 0
       height: 80
       width: 12
-      sliceName: "Malawi: Facility List"
+      sliceName: "Facility List"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000041"

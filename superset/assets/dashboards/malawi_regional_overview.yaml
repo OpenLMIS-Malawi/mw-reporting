@@ -216,7 +216,7 @@ position:
       chartId: 8801
       height: 50
       width: 12
-      sliceName: "Malawi: Requisitions by Region"
+      sliceName: "Requisitions by Region"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000011"
   ROW-malawi-2:
     type: ROW
@@ -240,5 +240,5 @@ position:
       chartId: 8802
       height: 80
       width: 12
-      sliceName: "Malawi: Requisitions — Raw Data"
+      sliceName: "Requisitions — Raw Data"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000088"

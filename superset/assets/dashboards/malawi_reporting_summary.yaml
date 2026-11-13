@@ -210,8 +210,8 @@ position:
       - ROW-headline
       - ROW-timeliness-week
       - ROW-trend
-      - ROW-pivot
       - ROW-annual
+      - ROW-pivot
       - ROW-expected
       - ROW-non-reporting
     parents:
@@ -249,7 +249,7 @@ position:
       chartId: 8901
       height: 50
       width: 12
-      sliceName: "Malawi: Reporting Rate Trend"
+      sliceName: "Reporting Rate Trend"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000062"
   CHART-timeliness:
     type: CHART
@@ -263,7 +263,7 @@ position:
       chartId: 8902
       height: 50
       width: 6
-      sliceName: "Malawi: Timeliness of Reports"
+      sliceName: "Timeliness of Reports"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000063"
   CHART-rate-program:
     type: CHART
@@ -277,7 +277,7 @@ position:
       chartId: 8903
       height: 50
       width: 6
-      sliceName: "Malawi: Reporting Rate by Program"
+      sliceName: "Reporting Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000064"
   ROW-timeliness-week:
     type: ROW
@@ -301,7 +301,7 @@ position:
       chartId: 8909
       height: 50
       width: 12
-      sliceName: "Malawi: Reporting Timeliness By Week"
+      sliceName: "Reporting Timeliness By Week"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000121"
   ROW-trend:
     type: ROW
@@ -325,7 +325,7 @@ position:
       chartId: 8904
       height: 50
       width: 12
-      sliceName: "Malawi: National Reporting Rate"
+      sliceName: "National Reporting Rate"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000065"
   ROW-pivot:
     type: ROW
@@ -349,7 +349,7 @@ position:
       chartId: 8905
       height: 60
       width: 12
-      sliceName: "Malawi: Indicator Summary: Reporting Rate by Program"
+      sliceName: "Indicator Summary: Reporting Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000066"
   ROW-annual:
     type: ROW
@@ -373,7 +373,7 @@ position:
       chartId: 8906
       height: 50
       width: 12
-      sliceName: "Malawi: Annual Reporting Rate by Program"
+      sliceName: "Annual Reporting Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000067"
   ROW-expected:
     type: ROW
@@ -397,7 +397,7 @@ position:
       chartId: 8910
       height: 50
       width: 12
-      sliceName: "Malawi: Expected Facilities to Report"
+      sliceName: "Expected Facilities to Report"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000122"
   ROW-non-reporting:
     type: ROW
@@ -422,7 +422,7 @@ position:
       chartId: 8907
       height: 60
       width: 6
-      sliceName: "Malawi: Non Reporting Facilities"
+      sliceName: "Non Reporting Facilities"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000068"
   CHART-skipped:
     type: CHART
@@ -436,5 +436,5 @@ position:
       chartId: 8908
       height: 60
       width: 6
-      sliceName: "Malawi: Skipped Facilities"
+      sliceName: "Skipped Facilities"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000116"

@@ -34,7 +34,7 @@ olmis-analytics-malawi/
       databases/reporting_clickhouse.yaml
       datasets/reporting_clickhouse/     # One dataset per Malawi mart; the mart_malawi_stock_full
                                          # dataset is in mart_malawi_consumption.yaml
-      charts/                            # 47 charts, all named "Malawi: ..."
+      charts/                            # 47 charts
       dashboards/                        # 10 dashboards, listed below
 ```
 
@@ -80,7 +80,7 @@ Every dashboard title starts with "Malawi LMIS". OpenLMIS embeds each one throug
 | Malawi LMIS Adjustments | `malawi_adjustments.yaml` | Adjustments by reason, district and program, and the mathematical-error trend |
 | Malawi LMIS Stock Status | `malawi_stock_status.yaml` | Stockout rate, months of stock and stock status distribution over time, non-reporting facilities |
 
-Several charts are Malawi copies of core charts: the same query under a "Malawi: " name, on a Malawi dataset, so the Malawi filters (official region included) reach them. A Malawi dashboard cannot place a core chart directly: `superset import-directory` links charts and filter datasets only within one asset bundle, and the platform imports core and each extension as separate bundles. When migrating dashboards from a country's legacy stack, see [the platform's docs/migration-differences.md](https://github.com/SolDevelo/soldevelo-reporting-stack/blob/main/docs/migration-differences.md) for the conventions used.
+Several charts are Malawi copies of core charts: the same query and name, on a Malawi dataset, so the Malawi filters (official region included) reach them. A Malawi dashboard cannot place a core chart directly: `superset import-directory` links charts and filter datasets only within one asset bundle, and the platform imports core and each extension as separate bundles. When migrating dashboards from a country's legacy stack, see [the platform's docs/migration-differences.md](https://github.com/SolDevelo/soldevelo-reporting-stack/blob/main/docs/migration-differences.md) for the conventions used.
 
 ## Usage
 

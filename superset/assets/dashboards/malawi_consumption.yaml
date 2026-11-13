@@ -246,7 +246,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Adjusted Consumption Trend"
+      sliceName: "Adjusted Consumption Trend"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000110"
   ROW-consumption:
     type: ROW
@@ -270,7 +270,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Consumption by District"
+      sliceName: "Consumption by District"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000112"
   ROW-district:
     type: ROW
@@ -294,7 +294,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Consumption per District"
+      sliceName: "Consumption per District"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000111"
   ROW-products:
     type: ROW
@@ -318,7 +318,7 @@ position:
       chartId: 0
       height: 50
       width: 12
-      sliceName: "Malawi: Most Consumed Products"
+      sliceName: "Most Consumed Products"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000114"
   ROW-logistics:
     type: ROW
@@ -342,5 +342,5 @@ position:
       chartId: 0
       height: 60
       width: 12
-      sliceName: "Malawi: Logistics Summary Report"
+      sliceName: "Logistics Summary Report"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000115"

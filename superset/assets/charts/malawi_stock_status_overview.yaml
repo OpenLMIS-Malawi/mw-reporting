@@ -1,4 +1,4 @@
-slice_name: "Malawi: Stock Status Overview"
+slice_name: "Stock Status Overview"
 viz_type: echarts_timeseries_bar
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000123"
 version: "1.0.0"

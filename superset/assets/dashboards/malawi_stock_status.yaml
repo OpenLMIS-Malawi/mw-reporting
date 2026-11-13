@@ -166,7 +166,7 @@ metadata:
       controlValues:
         enableEmptyFilter: false
       type: NATIVE_FILTER
-      description: "Re-grains Malawi: Months of Stock Over Time and Malawi: Stock Status Distribution Over Time. Both default to month; switch to quarter where monthly and quarterly reporters are mixed, because a quarterly reporter leaves holes in two months out of three. Malawi: Stockout Rate Over Time keeps its own monthly axis with one series per cadence."
+      description: "Re-grains Months of Stock Over Time and Stock Status Distribution Over Time. Both default to month; switch to quarter where monthly and quarterly reporters are mixed, because a quarterly reporter leaves holes in two months out of three. Stockout Rate Over Time keeps its own monthly axis with one series per cadence."
       cascadeParentIds: []
       defaultDataMask:
         extraFormData: {}
@@ -267,7 +267,7 @@ position:
       chartId: 9302
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate Over Time"
+      sliceName: "Stockout Rate Over Time"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000135"
   ROW-mw-mos:
     type: ROW
@@ -291,7 +291,7 @@ position:
       chartId: 9303
       height: 50
       width: 12
-      sliceName: "Malawi: Months of Stock Over Time"
+      sliceName: "Months of Stock Over Time"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000136"
   ROW-mw-distribution:
     type: ROW
@@ -315,7 +315,7 @@ position:
       chartId: 9304
       height: 50
       width: 12
-      sliceName: "Malawi: Stock Status Distribution Over Time"
+      sliceName: "Stock Status Distribution Over Time"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000025"
   ROW-mw-non-reporting:
     type: ROW
@@ -339,5 +339,5 @@ position:
       chartId: 9301
       height: 50
       width: 12
-      sliceName: "Malawi: Non Reporting Facilities"
+      sliceName: "Non Reporting Facilities"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000068"

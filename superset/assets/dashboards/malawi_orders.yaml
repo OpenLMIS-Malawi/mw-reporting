@@ -304,7 +304,7 @@ position:
       chartId: 8701
       height: 50
       width: 6
-      sliceName: "Malawi: Emergency vs Regular Orders"
+      sliceName: "Emergency vs Regular Orders"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000082"
   CHART-timeliness:
     type: CHART
@@ -318,7 +318,7 @@ position:
       chartId: 8702
       height: 50
       width: 6
-      sliceName: "Malawi: Order Timeliness"
+      sliceName: "Order Timeliness"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000083"
   ROW-bar:
     type: ROW
@@ -342,7 +342,7 @@ position:
       chartId: 8703
       height: 50
       width: 12
-      sliceName: "Malawi: Estimated Order Value"
+      sliceName: "Estimated Order Value"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000084"
   ROW-cost:
     type: ROW
@@ -366,7 +366,7 @@ position:
       chartId: 8704
       height: 50
       width: 12
-      sliceName: "Malawi: Total Cost of Orders"
+      sliceName: "Total Cost of Orders"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000085"
   ROW-non-reporting:
     type: ROW
@@ -390,5 +390,5 @@ position:
       chartId: 8705
       height: 50
       width: 12
-      sliceName: "Malawi: Non Reporting Facilities (Orders)"
+      sliceName: "Non Reporting Facilities (Orders)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000086"

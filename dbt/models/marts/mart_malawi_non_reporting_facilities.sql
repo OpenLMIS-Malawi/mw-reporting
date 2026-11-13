@@ -10,7 +10,8 @@
 -- Malawi non-reporting facilities: thin wrapper over the core
 -- mart_non_reporting_facilities that adds the official Malawi region (3-region
 -- crosswalk). Additive — reads core via ref(), does NOT modify core.
--- Shared by the Malawi Reporting Summary and Malawi Orders dashboards.
+-- Shared by the Malawi LMIS Reporting Summary, Malawi LMIS Orders and Malawi LMIS
+-- Stock Status dashboards.
 
 select
   f.*,

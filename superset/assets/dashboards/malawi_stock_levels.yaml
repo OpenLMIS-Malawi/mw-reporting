@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Stock Levels"
+dashboard_title: "Malawi LMIS Stock Levels"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000026"
 version: "1.0.0"
 description: "Stock level distribution by health program. Use the Program filter to drill into a specific program (Malaria, HIV, TB, EPI, Essential Meds, Reproductive Health, ...)."
@@ -247,7 +247,7 @@ position:
       chartId: 8401
       height: 60
       width: 12
-      sliceName: "Malawi: Stock Status Distribution Over Time"
+      sliceName: "Stock Status Distribution Over Time"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000025"
   ROW-mw-facility-status:
     type: ROW
@@ -271,5 +271,5 @@ position:
       chartId: 8402
       height: 80
       width: 12
-      sliceName: "Malawi: Current Stock Status by Facility"
+      sliceName: "Current Stock Status by Facility"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000087"

@@ -1,4 +1,4 @@
-slice_name: "Malawi: National Reporting Rate"
+slice_name: "National Reporting Rate"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000065"
 version: "1.0.0"

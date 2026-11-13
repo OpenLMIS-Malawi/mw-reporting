@@ -9,8 +9,8 @@
 
 -- Malawi full stock wrapper: thin wrapper over the core mart_stock_status
 -- that adds the official Malawi region (3-region crosswalk) and the month
--- completeness flags, nothing else. Shared by the Malawi Orders and Malawi
--- Consumption dashboards; the heavier mart_malawi_stock_status carries the
+-- completeness flags, nothing else. Shared by the Malawi LMIS Orders and
+-- Malawi LMIS Consumption dashboards; the heavier mart_malawi_stock_status carries the
 -- extra Malawi enrichments (health program, tracer flag, district ISO) for
 -- the Stock dashboards. Additive: reads core via ref(), does not modify it.
 

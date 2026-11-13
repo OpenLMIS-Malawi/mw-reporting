@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Facilities"
+dashboard_title: "Malawi LMIS Facilities"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000050"
 version: "1.0.0"
 description: "Malawi facility directory with facilities-per-region summary, using the three official Malawi regions."

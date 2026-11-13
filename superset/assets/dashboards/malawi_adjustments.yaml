@@ -1,0 +1,324 @@
+dashboard_title: "Malawi LMIS Adjustments"
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000134"
+version: "1.0.0"
+description: "Malawi stock-adjustment analytics: counts and totals by reason, district and program, and the mathematical-error trend, with a Region filter on the three official Malawi regions."
+slug: malawi-adjustments
+css: ""
+published: true
+certified_by: null
+certification_details: null
+is_managed_externally: false
+metadata:
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  default_filters: "{}"
+  color_scheme: supersetColors
+  label_colors: {}
+  color_scheme_domain: []
+  shared_label_colors: []
+  cross_filters_enabled: true
+  filter_bar_orientation: HORIZONTAL
+  native_filter_configuration:
+    - id: NATIVE_FILTER-program
+      name: Program
+      filterType: filter_select
+      targets:
+        - column:
+            name: program_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-region
+      name: Region
+      filterType: filter_select
+      targets:
+        - column:
+            name: official_region
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-district
+      name: District
+      filterType: filter_select
+      targets:
+        - column:
+            name: zone_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-region
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-period
+      name: Period
+      filterType: filter_select
+      targets:
+        - column:
+            name: period_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+        sortAscending: false
+        sortMetric: latest_period_end
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-facility
+      name: Facility
+      filterType: filter_select
+      targets:
+        - column:
+            name: facility_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded: []
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: true
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds:
+        - NATIVE_FILTER-program
+        - NATIVE_FILTER-region
+        - NATIVE_FILTER-district
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+    - id: NATIVE_FILTER-reason
+      name: Reason
+      filterType: filter_select
+      targets:
+        - column:
+            name: reason_name
+          datasetUuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000127"
+      scope:
+        rootPath:
+          - ROOT_ID
+        excluded:
+          - 9203
+      controlValues:
+        enableEmptyFilter: false
+        defaultToFirstItem: false
+        multiSelect: true
+        searchAllOptions: false
+        inverseSelection: false
+      type: NATIVE_FILTER
+      description: ""
+      cascadeParentIds: []
+      defaultDataMask:
+        extraFormData: {}
+        filterState:
+          value: null
+        ownState: {}
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    type: ROOT
+    id: ROOT_ID
+    children:
+      - GRID_ID
+  GRID_ID:
+    type: GRID
+    id: GRID_ID
+    children:
+      - ROW-summary
+      - ROW-pie-trend
+      - ROW-tables-1
+      - ROW-tables-2
+    parents:
+      - ROOT_ID
+  ROW-summary:
+    type: ROW
+    id: ROW-summary
+    children:
+      - CHART-summary
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-summary:
+    type: CHART
+    id: CHART-summary
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-summary
+    meta:
+      chartId: 9201
+      height: 50
+      width: 12
+      sliceName: "Malawi: Adjustment Summary"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000128"
+  ROW-pie-trend:
+    type: ROW
+    id: ROW-pie-trend
+    children:
+      - CHART-pie
+      - CHART-trend
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-pie:
+    type: CHART
+    id: CHART-pie
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-pie-trend
+    meta:
+      chartId: 9202
+      height: 50
+      width: 6
+      sliceName: "Malawi: % of Adjustments by Reason"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000129"
+  CHART-trend:
+    type: CHART
+    id: CHART-trend
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-pie-trend
+    meta:
+      chartId: 9203
+      height: 50
+      width: 6
+      sliceName: "Malawi: Mathematical Error Trends"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000130"
+  ROW-tables-1:
+    type: ROW
+    id: ROW-tables-1
+    children:
+      - CHART-top-reasons
+      - CHART-top-districts
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-top-reasons:
+    type: CHART
+    id: CHART-top-reasons
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-tables-1
+    meta:
+      chartId: 9204
+      height: 50
+      width: 6
+      sliceName: "Malawi: Top Adjustment Reasons"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000131"
+  CHART-top-districts:
+    type: CHART
+    id: CHART-top-districts
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-tables-1
+    meta:
+      chartId: 9205
+      height: 50
+      width: 6
+      sliceName: "Malawi: Top Districts with Adjustments"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000132"
+  ROW-tables-2:
+    type: ROW
+    id: ROW-tables-2
+    children:
+      - CHART-most-adjusted
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-most-adjusted:
+    type: CHART
+    id: CHART-most-adjusted
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-tables-2
+    meta:
+      chartId: 9206
+      height: 50
+      width: 12
+      sliceName: "Malawi: Most Adjusted Reason"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000133"

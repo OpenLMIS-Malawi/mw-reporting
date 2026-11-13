@@ -201,6 +201,24 @@ columns:
     filterable: true
     expression: null
     description: "1 when the row's month reached the completeness threshold (core mart_month_completeness); trend charts hide incomplete trailing months through this flag"
+  - column_name: line_item_id
+    verbose_name: Line Item ID
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: false
+    filterable: false
+    expression: null
+    description: null
+  - column_name: months_of_stock
+    verbose_name: Months of Stock
+    is_dttm: false
+    is_active: true
+    type: Float64
+    groupby: false
+    filterable: true
+    expression: null
+    description: null
 metrics:
   - metric_name: latest_period_end
     verbose_name: "Latest Period End"

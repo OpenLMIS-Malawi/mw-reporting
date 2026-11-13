@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Stock Levels"
+dashboard_title: "Malawi LMIS Stock Levels"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000026"
 version: "1.0.0"
 description: "Stock level distribution by health program. Use the Program filter to drill into a specific program (Malaria, HIV, TB, EPI, Essential Meds, Reproductive Health, ...)."

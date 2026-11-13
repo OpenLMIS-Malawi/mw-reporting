@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Summary"
+dashboard_title: "Malawi LMIS Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
 version: "1.0.0"
 description: "Executive summary for Malawi: district stockout map, programmatic stockout pivot, multi-program stockout trend, tracer product stockouts, and current inventory snapshot per program. All charts except the tracer product table answer the Program filter."

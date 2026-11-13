@@ -1,7 +1,7 @@
-dashboard_title: "Malawi Reporting Summary"
+dashboard_title: "Malawi LMIS Reporting Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000069"
 version: "1.0.0"
-description: "Malawi executive reporting summary: reporting rate by program, timeliness, indicator pivot, annual rates, and the three-year national trend — filterable by the three official Malawi regions."
+description: "Malawi executive reporting summary: reporting rate by program, timeliness, timeliness by week of the month, indicator pivot, annual rates, expected facilities per district, and the three-year national trend — filterable by the three official Malawi regions."
 slug: malawi-reporting-summary
 css: ""
 published: true
@@ -178,6 +178,8 @@ metadata:
           - 8906
           - 8907
           - 8908
+          - 8909
+          - 8910
       controlValues:
         enableEmptyFilter: false
       adhoc_filters:
@@ -206,9 +208,11 @@ position:
     children:
       - ROW-rate
       - ROW-headline
+      - ROW-timeliness-week
       - ROW-trend
       - ROW-pivot
       - ROW-annual
+      - ROW-expected
       - ROW-non-reporting
     parents:
       - ROOT_ID
@@ -275,6 +279,30 @@ position:
       width: 6
       sliceName: "Malawi: Reporting Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000064"
+  ROW-timeliness-week:
+    type: ROW
+    id: ROW-timeliness-week
+    children:
+      - CHART-timeliness-week
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-timeliness-week:
+    type: CHART
+    id: CHART-timeliness-week
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-timeliness-week
+    meta:
+      chartId: 8909
+      height: 50
+      width: 12
+      sliceName: "Malawi: Reporting Timeliness By Week"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000121"
   ROW-trend:
     type: ROW
     id: ROW-trend
@@ -347,6 +375,30 @@ position:
       width: 12
       sliceName: "Malawi: Annual Reporting Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000067"
+  ROW-expected:
+    type: ROW
+    id: ROW-expected
+    children:
+      - CHART-expected
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-expected:
+    type: CHART
+    id: CHART-expected
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-expected
+    meta:
+      chartId: 8910
+      height: 50
+      width: 12
+      sliceName: "Malawi: Expected Facilities to Report"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000122"
   ROW-non-reporting:
     type: ROW
     id: ROW-non-reporting

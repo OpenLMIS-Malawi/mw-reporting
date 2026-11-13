@@ -154,7 +154,7 @@ models:
   - name: mart_malawi_reporting_status
     description: >
       Wrapper over the core mart_reporting_status with official_region.
-      Backs the Malawi Reporting Summary dashboard.
+      Backs the Malawi LMIS Reporting Summary dashboard.
     columns:
       - name: schedule_type
         description: "Reporting frequency (Weekly / Monthly / Quarterly / BUQ), inherited from the core mart_reporting_status; target of the dashboard's Schedule Type filter."
@@ -171,8 +171,8 @@ models:
   - name: mart_malawi_stock_full
     description: >
       Unfiltered wrapper over the core mart_stock_status with official_region
-      and the in_latest_month snapshot flag. Shared by the Malawi Orders and
-      Malawi Consumption dashboards.
+      and the in_latest_month snapshot flag. Shared by the Malawi LMIS Orders and
+      Malawi LMIS Consumption dashboards.
     columns:
       - name: in_latest_month
         description: >
@@ -190,6 +190,53 @@ models:
         description: >
           1 when the row's month reached the completeness threshold; trend
           charts hide ragged trailing months through this flag.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: mart_malawi_adjustments
+    description: >
+      Wrapper over the core mart_adjustments with official_region and the
+      month-completeness flags. Backs the Malawi LMIS Adjustments dashboard.
+    columns:
+      - name: adjustment_id
+        description: Stock adjustment UUID
+        tests:
+          - not_null
+          - unique
+      - name: official_region
+        description: >
+          Standardised official region (Northern, Central, Southern) mapped
+          from parent_zone_name, or from zone_name when the parent is not in
+          the crosswalk, via the region_crosswalk seed. 'Unmapped' is the
+          sentinel for a zone absent from the crosswalk (should be 0 on real
+          Malawi data).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Northern
+                  - Central
+                  - Southern
+                  - Unmapped
+      - name: in_complete_month
+        description: >
+          1 when the row's month reached the completeness threshold (see the
+          core mart_month_completeness); trend charts hide incomplete trailing
+          months through this flag.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: in_latest_complete_month
+        description: >
+          1 for rows in the most recent complete reporting month. No Malawi
+          adjustments chart uses it yet; kept so the columns match the core
+          dataset.
         tests:
           - not_null
           - accepted_values:

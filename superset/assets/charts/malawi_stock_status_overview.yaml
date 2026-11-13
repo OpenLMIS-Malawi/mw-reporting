@@ -1,0 +1,50 @@
+slice_name: "Malawi: Stock Status Overview"
+viz_type: echarts_timeseries_bar
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000123"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+description: "Number of requisition line items in each stock status category over the last three years of complete months. The values are counts of line items, not percentages. Follows the filter bar, Region and District included."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  x_axis: stock_status
+  groupby: []
+  metrics:
+    - expressionType: SIMPLE
+      column:
+        column_name: line_item_id
+        type: String
+      aggregate: COUNT
+      label: "Line Item Count"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 3 years"
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: ==
+      operatorId: EQUALS
+      subject: in_complete_month
+      comparator: 1
+  order_desc: true
+  row_limit: 100
+  color_scheme: supersetColors
+  show_legend: false
+  x_axis_title: "Stock Status"
+  x_axis_title_margin: 60
+  xAxisLabelRotation: 45
+  y_axis_title: "Line Item Count"
+  y_axis_title_margin: 30
+  y_axis_title_position: Top
+  y_axis_format: ",.0f"
+  truncateYAxis: false
+  rich_tooltip: true
+  show_value: true
+  zoomable: false
+query_context: null

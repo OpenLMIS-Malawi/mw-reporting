@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Orders"
+dashboard_title: "Malawi LMIS Orders"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000090"
 version: "1.0.0"
 description: "Malawi order analytics: emergency vs regular split, per-facility costs, district-level order value, timeliness within the month, and non-reporting context. Region filter uses the three official Malawi regions."

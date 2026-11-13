@@ -1,0 +1,35 @@
+slice_name: "Malawi: Expected Facilities to Report"
+viz_type: table
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000122"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000060"
+description: "Number of distinct facilities expected to report per district, period and program."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  groupby:
+    - zone_name
+    - period_name
+    - program_name
+  metrics:
+    - expressionType: SIMPLE
+      column:
+        column_name: facility_id
+        type: String
+      aggregate: COUNT_DISTINCT
+      label: "Expected Facilities"
+  adhoc_filters: []
+  row_limit: 100000
+  order_by_cols: []
+  server_pagination: true
+  server_page_length: 25
+  order_desc: true
+  show_cell_bars: true
+  color_pn: false
+  table_timestamp_format: smart_date
+  page_length: 25
+  include_search: true
+query_context: null

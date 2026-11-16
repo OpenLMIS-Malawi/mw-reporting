@@ -1,4 +1,4 @@
-dashboard_title: "Malawi Summary"
+dashboard_title: "Malawi LMIS Summary"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000030"
 version: "1.0.0"
 description: "Executive summary for Malawi: district stockout map, programmatic stockout pivot, multi-program stockout trend, tracer product stockouts, and current inventory snapshot per program. All charts except the tracer product table answer the Program filter."
@@ -268,7 +268,7 @@ position:
       chartId: 9001
       height: 100
       width: 4
-      sliceName: "Malawi: District Stock-Out Rate (Map)"
+      sliceName: "District Stock-Out Rate (Map)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000031"
   CHART-ranked:
     type: CHART
@@ -282,7 +282,7 @@ position:
       chartId: 9002
       height: 100
       width: 8
-      sliceName: "Malawi: District Stock-Out Rate (Ranked)"
+      sliceName: "District Stock-Out Rate (Ranked)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000037"
   ROW-trend:
     type: ROW
@@ -306,7 +306,7 @@ position:
       chartId: 9003
       height: 60
       width: 12
-      sliceName: "Malawi: Program Stockout Rate"
+      sliceName: "Program Stockout Rate"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000033"
   ROW-pivot:
     type: ROW
@@ -330,7 +330,7 @@ position:
       chartId: 9004
       height: 60
       width: 12
-      sliceName: "Malawi: Avg. Stockout Rate (Consuming Lines Only)"
+      sliceName: "Avg. Stockout Rate (Consuming Lines Only)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000032"
   ROW-tables:
     type: ROW
@@ -355,7 +355,7 @@ position:
       chartId: 9005
       height: 70
       width: 6
-      sliceName: "Malawi: Tracer Product Stockouts"
+      sliceName: "Tracer Product Stockouts"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000034"
   CHART-snapshot:
     type: CHART
@@ -369,5 +369,5 @@ position:
       chartId: 9006
       height: 70
       width: 6
-      sliceName: "Malawi: Program Current Inventory Snapshot"
+      sliceName: "Program Current Inventory Snapshot"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000035"

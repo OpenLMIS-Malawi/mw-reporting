@@ -1,7 +1,7 @@
-dashboard_title: "Malawi Stockout Trends"
+dashboard_title: "Malawi LMIS Stockout Trends"
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000023"
 version: "1.0.0"
-description: "Malawi-specific stockout trends by health program and product over time."
+description: "Malawi stockout trends by program, product and district, plus the stock status overview and the facilities, products and districts with the most stocked-out line items."
 slug: malawi-stockouts
 css: ""
 published: true
@@ -223,6 +223,9 @@ position:
       - ROW-mw-stockout-1
       - ROW-mw-stockout-2
       - ROW-mw-stockout-3
+      - ROW-mw-stockout-4
+      - ROW-mw-stockout-5
+      - ROW-mw-stockout-6
     parents:
       - ROOT_ID
   ROW-mw-stockout-1:
@@ -244,10 +247,10 @@ position:
       - GRID_ID
       - ROW-mw-stockout-1
     meta:
-      chartId: 0
+      chartId: 9101
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Program"
+      sliceName: "Stockout Rate by Program"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000021"
   ROW-mw-stockout-2:
     type: ROW
@@ -268,10 +271,10 @@ position:
       - GRID_ID
       - ROW-mw-stockout-2
     meta:
-      chartId: 0
+      chartId: 9102
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by Product (12 with the most stocked-out lines)"
+      sliceName: "Stockout Rate by Product (12 with the most stocked-out lines)"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000022"
   ROW-mw-stockout-3:
     type: ROW
@@ -292,8 +295,95 @@ position:
       - GRID_ID
       - ROW-mw-stockout-3
     meta:
-      chartId: 0
+      chartId: 9103
       height: 50
       width: 12
-      sliceName: "Malawi: Stockout Rate by District"
+      sliceName: "Stockout Rate by District"
       uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000024"
+  ROW-mw-stockout-4:
+    type: ROW
+    id: ROW-mw-stockout-4
+    children:
+      - CHART-mw-status-overview
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-status-overview:
+    type: CHART
+    id: CHART-mw-status-overview
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-4
+    meta:
+      chartId: 9104
+      height: 50
+      width: 12
+      sliceName: "Stock Status Overview"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000123"
+  ROW-mw-stockout-5:
+    type: ROW
+    id: ROW-mw-stockout-5
+    children:
+      - CHART-mw-top-facilities
+      - CHART-mw-top-products
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-top-facilities:
+    type: CHART
+    id: CHART-mw-top-facilities
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-5
+    meta:
+      chartId: 9105
+      height: 50
+      width: 6
+      sliceName: "Most Stocked Out Facilities"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000124"
+  CHART-mw-top-products:
+    type: CHART
+    id: CHART-mw-top-products
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-5
+    meta:
+      chartId: 9106
+      height: 50
+      width: 6
+      sliceName: "Most Stocked Out Products"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000125"
+  ROW-mw-stockout-6:
+    type: ROW
+    id: ROW-mw-stockout-6
+    children:
+      - CHART-mw-top-districts
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-mw-top-districts:
+    type: CHART
+    id: CHART-mw-top-districts
+    children: []
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-mw-stockout-6
+    meta:
+      chartId: 9107
+      height: 50
+      width: 12
+      sliceName: "Most Stocked Out Districts"
+      uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000126"

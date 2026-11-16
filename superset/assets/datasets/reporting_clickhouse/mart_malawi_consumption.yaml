@@ -4,7 +4,7 @@ version: "1.0.0"
 database_uuid: "b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
 schema: curated
 main_dttm_col: period_end_date
-description: "Malawi consumption: full (unfiltered) copy of the core stock-status mart + official Malawi region. Backs the Malawi Consumption dashboard."
+description: "Malawi consumption: full (unfiltered) copy of the core stock-status mart + official Malawi region. Backs the Malawi LMIS Consumption dashboard."
 default_endpoint: null
 offset: 0
 cache_timeout: null

@@ -1,0 +1,45 @@
+slice_name: "Most Stocked Out Districts"
+viz_type: table
+uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000126"
+version: "1.0.0"
+dataset_uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000020"
+description: "Districts ranked by the number of stocked-out line items, 10 per page, over the last three years of complete months, the same window as the other charts on this dashboard. Mzimba North and Mzimba South count as Mzimba, and the region is the official region."
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  groupby:
+    - district_name
+    - official_region
+  metrics:
+    - expressionType: SQL
+      sqlExpression: "SUM(combined_stockout)"
+      label: "Stock-Out Count"
+  column_config:
+    Stock-Out Count:
+      d3NumberFormat: ",.0f"
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: period_end_date
+      comparator: "Last 3 years"
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: ==
+      operatorId: EQUALS
+      subject: in_complete_month
+      comparator: 1
+  row_limit: 10000
+  order_by_cols: []
+  server_pagination: false
+  order_desc: true
+  show_cell_bars: true
+  color_pn: true
+  table_timestamp_format: smart_date
+  page_length: 10
+  include_search: false
+query_context: null

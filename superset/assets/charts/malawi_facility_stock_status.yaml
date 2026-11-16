@@ -1,4 +1,4 @@
-slice_name: "Malawi: Current Stock Status by Facility"
+slice_name: "Current Stock Status by Facility"
 viz_type: table
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000087"
 version: "1.0.0"

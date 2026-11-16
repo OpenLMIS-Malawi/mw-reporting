@@ -1,4 +1,4 @@
-slice_name: "Malawi: Consumption by District"
+slice_name: "Consumption by District"
 viz_type: echarts_timeseries_line
 uuid: "e1f2a3b4-c5d6-4e7f-8a9b-000000000112"
 version: "1.0.0"
